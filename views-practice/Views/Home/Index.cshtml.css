@@ -1,0 +1,34 @@
+.swiper {
+    width: 350px;
+    height: 500px;
+   
+
+    box-shadow: none !important;
+  }
+
+
+  .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    box-shadow: 0 !important;
+  }
+
+.swiper-3d .swiper-slide-shadow {
+    opacity: 0 !important;
+
+    background: rgba(0, 0, 0, .05) !important;
+}
+
+
+
+
+
+
+@media only screen and (max-width: 600px) {
+  
+ .swiper-wrapper {
+  overflow: hidden;
+}
+}
