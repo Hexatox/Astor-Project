@@ -1,5 +1,64 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<div class="d-flex flex-column gap-2 justify-content-center align-items-center my-lg-5">
+    <h1>
+        اقرأ لتتعلم .. وتعلم لتنجح 🌠
+    </h1>
+
+    <h4 class="text-center fs-5 p-4 px-4">انضم لرحلة تعلم فريدة وممتعة باللغة العربية تضمن لك النجاح من خلال محتوى تقني متميز في مختلف مجالات هندسة البرمجيات</h4>
+</div>
+
+
+
+<div class="album py-5 bg-body-tertiary">
+
+
+
+    <div class="container d-flex justify-content-center align-items-center flex-column items-center">
+        <h4 class="mb-5">تصفح الآن كافة المواضيع ⚡️</h4>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+            @for (int i = 0; i < 7; i++)
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                             preserveAspectRatio="xMidYMid slice" focusable="false">
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#55595c"></rect>
+                            <text x="50%" y="50%" fill="#eceeef"
+                                  dy=".3em">Thumbnail</text>
+                        </svg>
+                        <div class="card-body">
+                            <h5>State Reducer Pattern in React</h5>
+                            <p class="card-text">
+                                رياكت تتميز بمرونتها الفكرية، حيث تُقدم للمطورين أدوات متعددة مع ترك الحرية لهم في اختيار
+                                كيفية بناء مشاريعهم. هاته الخاصية تجعل من ريكات مكتبة قوية ومرنة، مما تسمح بابتكار حلول
+                                مخصصة
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group gap-2 ">
+                                    <img src="https://placehold.co/32x32" class="rounded " alt="...">
+                                    <small class="text-body ">اسم الكاتب</small>
+                                </div>
+
+                                <small class="text-body-secondary d-flex justify-content-center align items-center">
+                                    <i class='bx bx-xs bx-time-five'></i> منذ يوم
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            }
+
+
+
+
+
+
+        </div>
+
+        <button class="btn btn-dark">عرض المزيد</button>
+    </div>
+</div>
