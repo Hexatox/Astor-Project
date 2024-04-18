@@ -1,3 +1,5 @@
+
+// hi guys this is shiit 
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
