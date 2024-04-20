@@ -6,16 +6,17 @@ namespace Models.Entities
     
     public class SocielMediaUser
     {
-        public string Link { get; set; }
+        // primary KEY
+        public int SocielMediaUserId { get; set; }
 
-        // relations / navigations
-
-
-        // those both <`ApplicationUserId`> and <`SocielMediaTypeId`> are Primary Key of this Entity
-        public int ApplicationUserId { get; set; }
+        // Foriegn key 
+        public string ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; } = null!;
-                                                            
+
+
         public SocialMediaType SocielMediaType { get; set; }
+        public string URL { get; set; }                                                  
+        
         
     }
     
