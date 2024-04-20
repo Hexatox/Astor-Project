@@ -14,11 +14,14 @@ namespace Models.Entities
         public string Lastname { get; set; }
         public string Bio {  get; set; }
         public string ProfilePhoto { get; set; }
+        public bool isBlocked {  get; set; }
 
         //navigation Propriry for his Sociel Media Links
         public IQueryable <SocielMediaUser> Links { get; set; }
 
         // navigation to reprisent the all User Reviews 
         public IQueryable <UserReview> Reviews { get; set; } 
+
+
     }
 }
