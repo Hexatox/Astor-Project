@@ -3,6 +3,7 @@
 // 
 
 using Microsoft.EntityFrameworkCore;
+using views_practice.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ builder.Services.AddControllersWithViews();
 // builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
 //     builder.Configuration.GetConnectionString("DefaultConntection"))
 // );  
+builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<UploadFileBlob>();
 var app = builder.Build();
 
 
