@@ -19,26 +19,23 @@ namespace views_practice.Utility
 
             try
             {
-                var blobConnectionString = configuration.GetConnectionString("BlodConnectionString");  // Check if the key is correctly spelled
-                var containerName = configuration["BlodContainerName"];  // Make sure this key matches exactly what's in the configuration file
+                var blobConnectionString = configuration.GetConnectionString("BlodConnectionString");  
+                var containerName = configuration["BlodContainerName"];  
 
-                // Setup the blob client
                 var blobContainerClient = new BlobContainerClient(blobConnectionString, containerName);
                 var blobClient = blobContainerClient.GetBlobClient(file.FileName);
 
-                // Upload the file
                 using (var stream = new MemoryStream())
                 {
                     await file.CopyToAsync(stream);
-                    stream.Position = 0; // Reset the position to the beginning after copying
+                    stream.Position = 0; 
                     await blobClient.UploadAsync(stream, true);
                 }
 
-                return blobClient.Uri.AbsoluteUri; // Return the full URL to the uploaded file
+                return blobClient.Uri.AbsoluteUri; 
             }
             catch (Exception ex)
             {
-                // Log the exception or handle it appropriately
                 return $"Failed to upload file: {ex.Message}";
             }
 
