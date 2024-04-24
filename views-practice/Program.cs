@@ -1,6 +1,6 @@
 
 // hi guys this is shiit
-// 
+// add 
 
 using Microsoft.EntityFrameworkCore;
 using views_practice.Utility;
