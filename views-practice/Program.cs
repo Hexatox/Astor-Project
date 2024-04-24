@@ -25,6 +25,17 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+app.Use(async (context, next) =>
+{
+    await next();
+    if (context.Response.StatusCode == 404)
+    {
+        context.Request.Path = "/Error/notFound";
+        await next();
+    }
+});
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
