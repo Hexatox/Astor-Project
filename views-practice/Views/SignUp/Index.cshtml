@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "إنشاء حساب";
+}
+
+<div class=" container flex-row gap-5 justify-content-center align-items-center mt-5 d-flex flex-wrap-reverse flex-xl-nowrap">
+
+
+
+
+    <form class="w-50  w-100">
+
+        <h1 class="h3 mb-3 fw-normal">التسجيل في أسطر</h1>
+
+        <div class="w-50  w-100 d-flex gap-2 flex-column">
+
+            <div class="  w-100 d-flex flex-row gap-2 justify-content-center align-items-center">
+                <div class="form-floating w-100">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Name">
+                    <label dir="rtl" for="floatingInput">الإسم الأول</label>
+                </div>  <div class="form-floating w-100">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Name">
+                    <label dir="rtl" for="floatingInput">اسم العائلة</label>
+                </div>
+            </div>
+
+
+            <div class="form-floating">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label dir="rtl" for="floatingInput">بريدك الإكتروني</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">كلمة المرور</label>
+            </div>
+
+            <div class="checkbox my-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> أوافق على شروط الخدمة 
+                </label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">تسجيل الدخول</button>
+            <h4 class="fs-6 fw-normal mt-3"> تملك حسابا ؟ <a href="/SignIn"> تسجيل الدخول</a></h4>
+        </div>
+
+
+
+    </form>
+
+    <img class="mb-4 w-50  w-100" src="/Images/undraw-signin.svg" alt="">
+</div>
+
+
+
+
