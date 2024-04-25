@@ -1,4 +1,4 @@
-﻿namespace Models.Entities
+﻿namespace DAL.Entities
 {
     public class Catigory
     {

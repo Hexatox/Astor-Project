@@ -1,6 +1,6 @@
 ﻿using Utility.Enum;
 
-namespace Models.Entities
+namespace DAL.Entities
 {
     public class Post
     {

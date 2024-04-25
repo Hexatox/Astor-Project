@@ -1,7 +1,7 @@
 ﻿using Utility;
 using Utility.Enum;
 
-namespace Models.Entities
+namespace DAL.Entities
 {
     
     public class SocielMediaUser
