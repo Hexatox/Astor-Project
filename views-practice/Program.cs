@@ -1,7 +1,6 @@
 
 // hi guys this is shiit
-// add
-// test
+// add 
 
 using Microsoft.EntityFrameworkCore;
 using views_practice.Utility;
