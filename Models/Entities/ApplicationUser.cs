@@ -26,6 +26,8 @@ namespace DAL.Entities
 
         // navigattion of User Messeges
         public IQueryable <Messege> Messeges {  get; set; }
+        // navigate User POSTS
+        public IQueryable <Post> Posts { get; set; }
     }
    
     public class ProfilePhoto

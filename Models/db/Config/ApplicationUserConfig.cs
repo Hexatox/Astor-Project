@@ -51,7 +51,10 @@ namespace DAL.db.Config
             builder.HasMany(u => u.Reviews)
                 .WithOne(r => r.ReviewTo)
                 .HasForeignKey(r => r.ReviewToId); // user has many Review `I mean the user can see the his Reviews Only`
-            
+
+            builder.HasMany(u => u.Posts)
+                .WithOne(p => p.User)
+                .HasForeignKey(p => p.UserId); // User Postes
         }
     }
 }
