@@ -23,6 +23,7 @@ namespace DAL.Entities
         // navigation to reprisent the all User Reviews 
         public IQueryable <UserReview> Reviews { get; set; } 
 
-
+        // navigattion of User Messeges
+        public IQueryable <Messege> Messeges {  get; set; }
     }
 }
