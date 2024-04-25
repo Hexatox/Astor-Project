@@ -33,7 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="db\Config\" />
     <Folder Include="Repositories\IRepositories\" />
   </ItemGroup>
 

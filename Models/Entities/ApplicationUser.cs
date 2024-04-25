@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Entities
 {
@@ -14,7 +15,7 @@ namespace DAL.Entities
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string Bio {  get; set; }
-        public string ProfilePhoto { get; set; }
+        public ProfilePhoto ProfilePhoto { get; set; } // own Type
         public bool isBlocked {  get; set; }
 
         //navigation Propriry for his Sociel Media Links
@@ -25,5 +26,11 @@ namespace DAL.Entities
 
         // navigattion of User Messeges
         public IQueryable <Messege> Messeges {  get; set; }
+    }
+   
+    public class ProfilePhoto
+    {
+        public string ImageName {  get; set; }
+        public string URL { get; set; }
     }
 }
