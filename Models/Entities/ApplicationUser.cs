@@ -28,8 +28,21 @@ namespace DAL.Entities
         public IQueryable <Messege> Messeges {  get; set; }
         // navigate User POSTS
         public IQueryable <Post> Posts { get; set; }
+
+        //navigate Users Commenrs
+        public IQueryable <Comment> Comments { get; set; }
+
+        // navigate User Likes
+        public IQueryable <Like> Likes { get; set; }
+    
+        // navigate User Request to be Admin 
+        //public IQueryable <Request> Requests { get; set; }
+
+        // navigate Admin Accepets for Request Users
+        //public IQueryable <Request> Accepts { get; set; }
+
     }
-   
+
     public class ProfilePhoto
     {
         public string ImageName {  get; set; }

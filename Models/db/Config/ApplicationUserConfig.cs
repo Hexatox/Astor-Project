@@ -16,18 +16,27 @@ namespace DAL.db.Config
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
             builder.HasKey (u => u.Id);
+            builder.Property(u => u.Id)
+                .HasMaxLength(64);
+           
             builder.Property(u => u.Firstname)
-                .HasColumnType("NVARCAR(50)")
+                .HasColumnType("NVARCHAR(64)")
                 .IsRequired(true);
             builder.Property(u => u.Lastname)
-                .HasColumnType("NVARCAR(50)")
+                .HasColumnType("NVARCHAR(64)")
                 .IsRequired(true);
             builder.Property(u => u.Bio)
                 .HasColumnType("NVARCHAR(MAX)")
                 .IsRequired(false);
-            
             builder.Property (u => u.isBlocked)
                 .HasDefaultValue(false);
+
+            //builder.HasIndex(u => u.Email)
+            //    .IsUnique();
+            //builder.HasIndex (u => u.UserName)
+            //    .IsUnique ();
+            
+
 
             builder.OwnsOne(u => u.ProfilePhoto,
                     pp =>
@@ -52,9 +61,30 @@ namespace DAL.db.Config
                 .WithOne(r => r.ReviewTo)
                 .HasForeignKey(r => r.ReviewToId); // user has many Review `I mean the user can see the his Reviews Only`
 
+            builder.HasMany<UserReview>()
+                .WithOne(r => r.User)
+                .HasForeignKey(r => r.UserId);
+
             builder.HasMany(u => u.Posts)
                 .WithOne(p => p.User)
                 .HasForeignKey(p => p.UserId); // User Postes
+
+            builder.HasMany (u => u.Likes)
+                .WithOne (l => l.User)
+                .HasForeignKey(l => l.UserId);
+            
+            builder.HasMany (u => u.Comments)
+                .WithOne(m => m.User)
+                .HasForeignKey(m => m.UserId);
+
+            builder.HasMany<Request>()
+                .WithOne(p => p.User)
+                .HasForeignKey(p => p.UserId); // this relation for User Requests
+
+            builder.HasMany<Request>()
+                .WithOne(p => p.Admin)
+                .HasForeignKey (a => a.AdminId);
+
         }
     }
 }

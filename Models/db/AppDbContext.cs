@@ -23,12 +23,16 @@ namespace DAL.db
 
             builder.ApplyConfigurationsFromAssembly (typeof (AppDbContext).Assembly); // for Entities Configuration
             SeedUsersRoles seed = new SeedUsersRoles();
+
+
             builder.Entity<IdentityRole>()
                 .HasData(seed.roles);
+
             builder.Entity<ApplicationUser>()
                 .HasData(seed.users);
-            builder.Entity<IdentityUserRole<string>>()
-                .HasData(seed.roles);
+
+            //builder.Entity<IdentityUserRole<string>>()
+            //    .HasData(seed.roles);        // this line is not works When run the Migration 
         }
         public DbSet <Catigory> Catigories { get; set; }
         public DbSet <Comment> Comments { get; set; }
@@ -65,12 +69,15 @@ public class SeedUsersRoles
         // Seed Roles
         var adminRole = new IdentityRole(Roles.Admin.ToString());
         adminRole.NormalizedName = adminRole.Name!.ToUpper();
+        adminRole.Id = "1a3a4b39-4cb9-432b-8e2b-8eba3ce78bad";
 
         var AutherRole = new IdentityRole(Roles.Auther.ToString());
         AutherRole.NormalizedName = AutherRole.Name!.ToUpper();
+        AutherRole.Id = "287321f4-5bda-4ae6-ad53-109878376a14";
 
         var UserRole = new IdentityRole(Roles.User.ToString());
         UserRole.NormalizedName = UserRole.Name!.ToUpper();
+        UserRole.Id = "df11c404-c205-448a-97fb-a8f81f4904aa";
 
         List<IdentityRole> roles = new List<IdentityRole>() {
            adminRole,
@@ -90,6 +97,7 @@ public class SeedUsersRoles
         // Seed Users
         var adminUser = new ApplicationUser
         {
+            Id = "1d35e3ea-fb63-482f-b7f7-daf830fc6285",
             UserName = "Admin@gmail.com",
             Email = "Admin@gmail.com",
             EmailConfirmed = true,
@@ -104,6 +112,7 @@ public class SeedUsersRoles
 
         var AutherUser = new ApplicationUser
         {
+            Id = "1121e9a5-f1f1-434b-a55d-bbe9d7a6b590",
             UserName = "Auther@gmil.com",
             Email = "Auther@gmil.com",
             EmailConfirmed = true,
@@ -118,6 +127,7 @@ public class SeedUsersRoles
 
         var UserUser = new ApplicationUser
         {
+            Id = "b178fae6-61f1-4b54-9480-021cf483faf8",
             UserName = "User@gmil.com",
             Email = "User@gmil.com",
             EmailConfirmed = true,
