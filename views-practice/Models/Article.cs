@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
+
 
 namespace views_practice.Models
 {
@@ -24,5 +26,16 @@ namespace views_practice.Models
         public string       Content { get; set; }
         public List<string> Tages { get; set; }
 
+        
+
+      
+
+public override string ToString()
+    {
+
+        return JsonSerializer.Serialize(this);
     }
+
+
+}
 }
