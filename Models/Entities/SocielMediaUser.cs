@@ -10,8 +10,8 @@ namespace DAL.Entities
         public int SocielMediaUserId { get; set; }
 
         // Foriegn key 
-        public string ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; } = null!;
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; } = null!;
 
 
         public SocialMediaType SocielMediaType { get; set; }

@@ -4,7 +4,7 @@ namespace DAL.Entities
 {
     public class Post
     {
-        PostType PostType { get; set; }
+        public PostType PostType { get; set; }
         public int PostId { get; set; }
         public string Image { get; set; }
         public string Title { get; set; }
