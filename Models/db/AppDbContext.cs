@@ -32,7 +32,7 @@ namespace DAL.db
                 .HasData(seed.users);
 
             //builder.Entity<IdentityUserRole<string>>()
-            //    .HasData(seed.roles);        // this line is not works When run the Migration 
+              //  .HasData(seed.roles);        // this line is not works When run the Migration 
         }
         public DbSet <Catigory> Catigories { get; set; }
         public DbSet <Comment> Comments { get; set; }
@@ -156,20 +156,20 @@ public class SeedUsersRoles
 
         userRoles.Add(new IdentityUserRole<string>
         {
-            UserId = users[0].Id,
-            RoleId = roles.First(q => q.Name == Roles.Admin.ToString()).Id
+            UserId = "1d35e3ea-fb63-482f-b7f7-daf830fc6285",
+            RoleId = "1a3a4b39-4cb9-432b-8e2b-8eba3ce78bad"
         });
 
         userRoles.Add(new IdentityUserRole<string>
         {
-            UserId = users[1].Id,
-            RoleId = roles.First(q => q.Name == Roles.Auther.ToString()).Id
+            UserId = "1121e9a5-f1f1-434b-a55d-bbe9d7a6b590",
+            RoleId = "287321f4-5bda-4ae6-ad53-109878376a14"
         });
 
         userRoles.Add(new IdentityUserRole<string>
         {
-            UserId = users[2].Id,
-            RoleId = roles.First(q => q.Name == Roles.User.ToString()).Id
+            UserId = "b178fae6-61f1-4b54-9480-021cf483faf8",
+            RoleId = "df11c404-c205-448a-97fb-a8f81f4904aa"
         });
 
         return userRoles;
