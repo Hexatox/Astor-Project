@@ -1,5 +1,9 @@
 using System.Diagnostics;
+using DAL.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Utility.Enum;
 using views_practice.Models;
 using views_practice.Utility;
 

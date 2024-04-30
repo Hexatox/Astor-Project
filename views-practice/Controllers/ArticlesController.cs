@@ -1,14 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DAL.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Text.Json;
+using Utility.Enum;
 using views_practice.Models;
 
 namespace views_practice.Controllers
 {
 	public class ArticlesController : Controller
 	{
-		public IActionResult Index()
+        
+        public ArticlesController()
+        {
+
+        }
+        public IActionResult Index()
 		{
-			return View();
+            
+
+
+            return View();
 		}
 
 		[HttpGet]
@@ -22,7 +34,7 @@ namespace views_practice.Controllers
             article.Description = "Adnane will explain how to get fucked by js in visual studion 2022 ";
 
 
-
+			
 
             return article.ToString() ; 
 
