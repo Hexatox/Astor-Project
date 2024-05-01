@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Utility.Enum;
-
+//test
 namespace DAL.db
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser>
