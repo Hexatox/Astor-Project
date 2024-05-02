@@ -8,7 +8,6 @@ using views_practice.Models;
 using views_practice.Utility;
 
 namespace views_practice.Controllers;
-
 public class HomeController : Controller
 {
 
@@ -24,11 +23,13 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        
         return View();
     }
 
     public IActionResult Privacy()
     {
+        
         return View();
     }
 
