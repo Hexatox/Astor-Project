@@ -34,12 +34,18 @@ namespace DAL.Entities
 
         // navigate User Likes
         public IQueryable <Like> Likes { get; set; }
-    
+
         // navigate User Request to be Admin 
         //public IQueryable <Request> Requests { get; set; }
 
         // navigate Admin Accepets for Request Users
         //public IQueryable <Request> Accepts { get; set; }
+
+
+        public string getFullName()
+        {
+            return Firstname; 
+    }
 
     }
 
@@ -48,4 +54,6 @@ namespace DAL.Entities
         public string ImageName {  get; set; }
         public string URL { get; set; }
     }
+
+    
 }

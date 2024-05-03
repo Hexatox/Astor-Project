@@ -30,8 +30,8 @@ namespace views_practice.Controllers
 
             Article article = new Article();
             article.Id = 023;
-            article.Title = "How to get fucked with JS";
-            article.Description = "Adnane will explain how to get fucked by js in visual studion 2022 ";
+            article.Title = "Article Title from DB";
+            article.Description = "This is a description of article :) ";
 
 
 			
