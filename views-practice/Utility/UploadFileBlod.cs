@@ -2,7 +2,7 @@
 
 namespace views_practice.Utility
 {
-    public class UploadFileBlob
+    public class UploadFileBlob : IUploadFile
     {
         private readonly IConfiguration configuration;
         public UploadFileBlob(IConfiguration configuration)

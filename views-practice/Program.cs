@@ -21,7 +21,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
 }).AddEntityFrameworkStores<AppDbContext>()
-            .AddDefaultTokenProviders();
+            .AddDefaultTokenProviders().AddDefaultUI();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -34,7 +34,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddRazorPages();
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<UploadFileBlob>();
+builder.Services.AddScoped<IUploadFile,UploadFileBlob>();
 builder.Services.AddScoped <IEmailSender , EmailSender>();
 
 var app = builder.Build();
