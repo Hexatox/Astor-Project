@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240502153355_Reset")]
-    partial class Reset
+    [Migration("20240504223759_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,7 +112,7 @@ namespace DAL.Migrations
                             Id = "1d35e3ea-fb63-482f-b7f7-daf830fc6285",
                             AccessFailedCount = 0,
                             Bio = "I am Defult Admin",
-                            ConcurrencyStamp = "e9a3718d-b5a8-47f9-a555-f7d44bf30af7",
+                            ConcurrencyStamp = "73d44003-6578-4c73-9dc2-04b90ea156d9",
                             Email = "Admin@gmail.com",
                             EmailConfirmed = true,
                             Firstname = "Astor",
@@ -120,9 +120,9 @@ namespace DAL.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEMFygzoPf9S5MKI6DNGqWpvBouiyASVUyfa1eZ/qyKl2mrJxq8EQFXFk2EYyGyaeg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEIHGhvg5zQw8E0anLZncLuROagsfrE7961iEZ1aHP1DjBOPnZN5yU7u3/Us7OiDOQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4a9c5b1b-53c4-4631-85c8-49c1f3181d9c",
+                            SecurityStamp = "d4b08f4b-f3f3-49c0-8b00-20b080854161",
                             TwoFactorEnabled = false,
                             UserName = "Admin@gmail.com",
                             isBlocked = true
@@ -132,7 +132,7 @@ namespace DAL.Migrations
                             Id = "1121e9a5-f1f1-434b-a55d-bbe9d7a6b590",
                             AccessFailedCount = 0,
                             Bio = "I am Defult Auther",
-                            ConcurrencyStamp = "37cc2757-9908-4492-a901-a2fcaaea27a2",
+                            ConcurrencyStamp = "4d5d0c35-3a1f-4757-97bb-9abdc58c8c7c",
                             Email = "Auther@gmil.com",
                             EmailConfirmed = true,
                             Firstname = "Astor",
@@ -140,9 +140,9 @@ namespace DAL.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "AUTHER@GMIL.COM",
                             NormalizedUserName = "AUTHER@GMIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENK1jJKbQuPGqoG7RYOn25sbwzxl0yCGpNmoS9fHfumJBfWq2bXi5tsGOCtyFr36wA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBBw6ayt9AyFFFnrhfXcjlqCeVYfGJd2kljFGKzgf8ll7nTnllQ7kxB1q3mLbqnwLA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ce1a7f65-878a-4bbf-9a15-7d338ca1f7e3",
+                            SecurityStamp = "09ab2b3f-bca9-431e-9d18-1660438944bc",
                             TwoFactorEnabled = false,
                             UserName = "Auther@gmil.com",
                             isBlocked = true
@@ -152,7 +152,7 @@ namespace DAL.Migrations
                             Id = "b178fae6-61f1-4b54-9480-021cf483faf8",
                             AccessFailedCount = 0,
                             Bio = "I am Defult User",
-                            ConcurrencyStamp = "54a4b29d-e2df-4a72-a9c5-f25842504b4b",
+                            ConcurrencyStamp = "54d94ed8-f9c5-4d96-b9cf-f34a1df67655",
                             Email = "User@gmil.com",
                             EmailConfirmed = true,
                             Firstname = "Astor",
@@ -160,9 +160,9 @@ namespace DAL.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@GMIL.COM",
                             NormalizedUserName = "USER@GMIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKm/kXbeUUD1WF9gvUaSnQ3Kv5DuhjqFAiunyjPvj9DPXiOlDDfobr4VBPtfLY/Oow==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPd0CSAksS/qmlDN1iU/Gw+wOc1bjm/KtUvaG682gnXrxfr7EyzTP0zv4Osg+cHxkw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "aa4e4913-d9d8-4e06-b33c-7f23c0c8319c",
+                            SecurityStamp = "d8a2c028-900c-4888-b3e9-f45cf23343c8",
                             TwoFactorEnabled = false,
                             UserName = "User@gmil.com",
                             isBlocked = true
