@@ -1,4 +1,5 @@
-﻿using DAL.Entities;
+﻿using DAL.db;
+using DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -65,7 +66,6 @@ public class SeedUsersRoles
 
     private List<IdentityRole> GetRoles()
     {
-
         // Seed Roles
         var adminRole = new IdentityRole(Roles.Admin.ToString());
         adminRole.NormalizedName = adminRole.Name!.ToUpper();

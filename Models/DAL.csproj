@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+    
     
   </PropertyGroup>
 
@@ -30,10 +30,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Utility\Utility.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repositories\IRepositories\" />
   </ItemGroup>
 
 </Project>

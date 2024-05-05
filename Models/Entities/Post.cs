@@ -1,4 +1,6 @@
-﻿using Utility.Enum;
+﻿using System;
+using System.Linq;
+using Utility.Enum;
 
 namespace DAL.Entities
 {
