@@ -1,16 +1,10 @@
 using DAL.db;
 using DAL.Entities;
 using DAL.Repositories.IRepositories;
-using Elfie.Serialization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Drawing;
-using views_practice.Models;
 using views_practice.Utility;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 var builder = WebApplication.CreateBuilder(args);
 
