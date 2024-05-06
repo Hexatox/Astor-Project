@@ -1,4 +1,6 @@
-﻿namespace DAL.Entities
+﻿using System.Linq;
+
+namespace DAL.Entities
 {
     public class Catigory
     {

@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using DAL.Entities;
+using DAL.Repositories.IRepositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,14 +17,15 @@ public class HomeController : Controller
 
 
     private readonly ILogger<HomeController> _logger;
-    public HomeController(ILogger<HomeController> logger)
+    private readonly ICatigoryRepository catigoryRepository;
+    public HomeController(ILogger<HomeController> logger, ICatigoryRepository catigoryRepository)
     {
         _logger = logger;
+        this.catigoryRepository = catigoryRepository;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        
         return View();
     }
 

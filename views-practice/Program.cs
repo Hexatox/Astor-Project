@@ -1,5 +1,6 @@
 using DAL.db;
 using DAL.Entities;
+using DAL.Repositories.IRepositories;
 using Elfie.Serialization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -43,6 +44,11 @@ builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IUploadFile,UploadFileBlob>();
 builder.Services.AddScoped <IEmailSender , EmailSender>();
+builder.Services.Scan(scan => scan
+    .FromAssemblyOf<AppDbContext>()
+    .AddClasses(classes => classes.AssignableTo(typeof(IRepository<>)))
+        .AsImplementedInterfaces()
+        .WithScopedLifetime()); // this will register all classes that implement IRepository<TEntity> as a service with the same interface
 
 var app = builder.Build();
 

@@ -1,4 +1,6 @@
-﻿namespace DAL.Entities
+﻿using System;
+
+namespace DAL.Entities
 {
     public class UserReview
     {
