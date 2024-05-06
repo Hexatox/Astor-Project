@@ -1,3 +1,4 @@
+using BLL.Services.IServices;
 using DAL.db;
 using DAL.Entities;
 using DAL.Repositories.IRepositories;
@@ -43,6 +44,13 @@ builder.Services.Scan(scan => scan
     .AddClasses(classes => classes.AssignableTo(typeof(IRepository<>)))
         .AsImplementedInterfaces()
         .WithScopedLifetime()); // this will register all classes that implement IRepository<TEntity> as a service with the same interface
+
+builder.Services.Scan(scan => scan
+    .FromAssemblyOf<IService>()
+    .AddClasses(classes => classes.AssignableTo(typeof(IService)))
+        .AsImplementedInterfaces()
+        .WithScopedLifetime()); // this will register all classes that implement IService as a service with the same interface
+
 
 var app = builder.Build();
 
