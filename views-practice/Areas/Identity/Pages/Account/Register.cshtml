@@ -17,31 +17,38 @@
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.Firstname" class="form-control" autocomplete="username" aria-required="true" />
-                <label asp-for="Input.Firstname">Firstname</label>
+                <label asp-for="Input.Firstname">الإسم الأول</label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.Lasttname" class="form-control" autocomplete="username" aria-required="true" />
-                <label asp-for="Input.Lasttname">Lastname</label>
+                <label asp-for="Input.Lasttname">اسم العائلة</label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                <label asp-for="Input.Email">Email</label>
+                <label asp-for="Input.Email">بريدك الإلكتروني</label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
+              
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.Password">Password</label>
+                <i class="bi bi-eye-slash" id="togglePassword"></i>
+                <label asp-for="Input.Password">كلمة المرور</label>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
+                
+
             </div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                <label asp-for="Input.ConfirmPassword">تأكيد كلمة المرور</label>
+                <i class="bi bi-eye-slash" id="togglePassword"></i>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+               
+
             </div>
             
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">تسجيل</button>
         </form>
     </div>
     <div class="col-md-8 ">
@@ -52,3 +59,20 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
+
+<script>
+    const togglePassword = document
+        .querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+    togglePassword.addEventListener('click', () => {
+        // Toggle the type attribute using
+        // getAttribure() method
+        const type = password
+            .getAttribute('type') === 'password' ?
+            'text' : 'password';
+        password.setAttribute('type', type);
+        // Toggle the eye and bi-eye icon
+        this.classList.toggle('bi-eye');
+    });
+</script>
