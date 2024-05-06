@@ -46,9 +46,9 @@ builder.Services.AddScoped<IUploadFile,UploadFileBlob>();
 builder.Services.AddScoped <IEmailSender , EmailSender>();
 builder.Services.Scan(scan => scan
     .FromAssemblyOf<AppDbContext>()
-       .AddClasses(classes => classes.AssignableTo<IRepository<Catigory>>())
-          .AsImplementedInterfaces()
-             .WithScopedLifetime()); // this will register all classes that implement IRepository<TEntity> as a service with the same interface
+    .AddClasses(classes => classes.AssignableTo(typeof(IRepository<>)))
+        .AsImplementedInterfaces()
+        .WithScopedLifetime()); // this will register all classes that implement IRepository<TEntity> as a service with the same interface
 
 var app = builder.Build();
 

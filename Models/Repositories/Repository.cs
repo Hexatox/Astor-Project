@@ -48,6 +48,11 @@ namespace DAL.Repositories
             return appDbContext.Set<T>().Find(id);
         }
 
+        public async Task<T?> FindAsync(object id)
+        {
+            return await appDbContext.Set<T>().FindAsync(id);
+        }
+
         public IEnumerable<T> GetAll()
         {
             return appDbContext.Set<T>().ToList();

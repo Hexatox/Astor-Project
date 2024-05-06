@@ -21,5 +21,6 @@ namespace DAL.Repositories.IRepositories
         Task<int> SaveAsync();
         int Save();
         T? Find(object id);
+        Task<T?> FindAsync(object id);
     }
 }
