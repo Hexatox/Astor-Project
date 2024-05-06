@@ -36,7 +36,7 @@ namespace views_practice.Utility
             }
             catch (Exception ex)
             {
-                return $"Failed to upload file: {ex.Message}";
+                return null;
             }
 
 
