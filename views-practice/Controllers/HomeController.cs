@@ -17,14 +17,12 @@ public class HomeController : Controller
 
 
     private readonly ILogger<HomeController> _logger;
-    private readonly ICatigoryRepository catigoryRepository;
-    public HomeController(ILogger<HomeController> logger, ICatigoryRepository catigoryRepository)
+    public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
-        this.catigoryRepository = catigoryRepository;
     }
 
-    public async Task<IActionResult> Index()
+    public IActionResult Index()
     {
         return View();
     }
