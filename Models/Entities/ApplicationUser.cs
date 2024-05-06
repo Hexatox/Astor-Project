@@ -17,6 +17,7 @@ namespace DAL.Entities
         public string Bio {  get; set; }
         public ProfilePhoto ProfilePhoto { get; set; } // own Type
         public bool isBlocked {  get; set; }
+        public DateTime CreateDate { get; set; }
 
         //navigation Propriry for his Sociel Media Links
         public IQueryable <SocielMediaUser> Links { get; set; }

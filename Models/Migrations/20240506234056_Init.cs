@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,6 +38,7 @@ namespace DAL.Migrations
                     ImageName = table.Column<string>(type: "NVARCHAR(max)", nullable: true),
                     URL = table.Column<string>(type: "NVARCHAR(MAX)", nullable: true),
                     isBlocked = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -391,12 +392,12 @@ namespace DAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "Bio", "ConcurrencyStamp", "Email", "EmailConfirmed", "Firstname", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "isBlocked" },
+                columns: new[] { "Id", "AccessFailedCount", "Bio", "ConcurrencyStamp", "CreateDate", "Email", "EmailConfirmed", "Firstname", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1121e9a5-f1f1-434b-a55d-bbe9d7a6b590", 0, "I am Defult Auther", "4d5d0c35-3a1f-4757-97bb-9abdc58c8c7c", "Auther@gmil.com", true, "Astor", "Auther", false, null, "AUTHER@GMIL.COM", "AUTHER@GMIL.COM", "AQAAAAIAAYagAAAAEBBw6ayt9AyFFFnrhfXcjlqCeVYfGJd2kljFGKzgf8ll7nTnllQ7kxB1q3mLbqnwLA==", null, false, "09ab2b3f-bca9-431e-9d18-1660438944bc", false, "Auther@gmil.com", true },
-                    { "1d35e3ea-fb63-482f-b7f7-daf830fc6285", 0, "I am Defult Admin", "73d44003-6578-4c73-9dc2-04b90ea156d9", "Admin@gmail.com", true, "Astor", "Admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEEIHGhvg5zQw8E0anLZncLuROagsfrE7961iEZ1aHP1DjBOPnZN5yU7u3/Us7OiDOQ==", null, false, "d4b08f4b-f3f3-49c0-8b00-20b080854161", false, "Admin@gmail.com", true },
-                    { "b178fae6-61f1-4b54-9480-021cf483faf8", 0, "I am Defult User", "54d94ed8-f9c5-4d96-b9cf-f34a1df67655", "User@gmil.com", true, "Astor", "User", false, null, "USER@GMIL.COM", "USER@GMIL.COM", "AQAAAAIAAYagAAAAEPd0CSAksS/qmlDN1iU/Gw+wOc1bjm/KtUvaG682gnXrxfr7EyzTP0zv4Osg+cHxkw==", null, false, "d8a2c028-900c-4888-b3e9-f45cf23343c8", false, "User@gmil.com", true }
+                    { "1121e9a5-f1f1-434b-a55d-bbe9d7a6b590", 0, "I am Defult Auther", "60b5ca0e-6fe3-4430-8f17-4c178ff81991", new DateTime(2024, 5, 7, 0, 40, 55, 156, DateTimeKind.Local).AddTicks(4550), "Auther@gmil.com", true, "Astor", "Auther", false, null, "AUTHER@GMIL.COM", "AUTHER@GMIL.COM", "AQAAAAIAAYagAAAAEFb3+P0qxhFNNW7u5foWedn3FCYuwwQGphUIpVp6s1qa/O7DKHg+eVDzL5Qk2L4mSg==", null, false, "4d65f0bc-5935-4c47-a7ec-b9ad709184ec", false, "Auther@gmil.com" },
+                    { "1d35e3ea-fb63-482f-b7f7-daf830fc6285", 0, "I am Defult Admin", "c82fbff7-2988-4bfc-842b-1b8450e694fa", new DateTime(2024, 5, 7, 0, 40, 55, 97, DateTimeKind.Local).AddTicks(2052), "Admin@gmail.com", true, "Astor", "Admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEK0PNrBmgogfBAEKZAlMomzlenw81Cz+4YJOayOQQt5+5F8a8jNiAISSxyV7SkG5kQ==", null, false, "6f1986df-6808-459e-8a0c-afc1f30639fe", false, "Admin@gmail.com" },
+                    { "b178fae6-61f1-4b54-9480-021cf483faf8", 0, "I am Defult User", "1df1f047-deba-4bc0-8790-2c19604c592c", new DateTime(2024, 5, 7, 0, 40, 55, 214, DateTimeKind.Local).AddTicks(3689), "User@gmil.com", true, "Astor", "User", false, null, "USER@GMIL.COM", "USER@GMIL.COM", "AQAAAAIAAYagAAAAEIN8+i40mmwOTP4sojBTzoM2oNHcePRkT2iRFL2qzeALoB1+t/1vqtBd/u8r2W1mww==", null, false, "0ea43905-a82e-4069-adf0-29d152b99372", false, "User@gmil.com" }
                 });
 
             migrationBuilder.InsertData(

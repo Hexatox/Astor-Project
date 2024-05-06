@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using DAL.Entities;
+using views_practice.Models;
 
 namespace views_practice.Areas.Identity.Pages.Account
 {
@@ -22,11 +23,12 @@ namespace views_practice.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger , UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
             _logger = logger;
+            this._userManager = userManager;    
         }
 
         /// <summary>
@@ -116,6 +118,13 @@ namespace views_practice.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    var user = await _userManager.GetUserAsync(User);
+                    if (user.isBlocked == true)
+                    {
+                        _logger.LogInformation("User is Blocked");
+                        throw new NotImplementedException("this piece of code should be Implemented to Redicrect to the Correct page");
+                    }
+                    
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

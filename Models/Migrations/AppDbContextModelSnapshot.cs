@@ -38,6 +38,9 @@ namespace DAL.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -109,7 +112,8 @@ namespace DAL.Migrations
                             Id = "1d35e3ea-fb63-482f-b7f7-daf830fc6285",
                             AccessFailedCount = 0,
                             Bio = "I am Defult Admin",
-                            ConcurrencyStamp = "73d44003-6578-4c73-9dc2-04b90ea156d9",
+                            ConcurrencyStamp = "c82fbff7-2988-4bfc-842b-1b8450e694fa",
+                            CreateDate = new DateTime(2024, 5, 7, 0, 40, 55, 97, DateTimeKind.Local).AddTicks(2052),
                             Email = "Admin@gmail.com",
                             EmailConfirmed = true,
                             Firstname = "Astor",
@@ -117,19 +121,20 @@ namespace DAL.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEIHGhvg5zQw8E0anLZncLuROagsfrE7961iEZ1aHP1DjBOPnZN5yU7u3/Us7OiDOQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEK0PNrBmgogfBAEKZAlMomzlenw81Cz+4YJOayOQQt5+5F8a8jNiAISSxyV7SkG5kQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d4b08f4b-f3f3-49c0-8b00-20b080854161",
+                            SecurityStamp = "6f1986df-6808-459e-8a0c-afc1f30639fe",
                             TwoFactorEnabled = false,
                             UserName = "Admin@gmail.com",
-                            isBlocked = true
+                            isBlocked = false
                         },
                         new
                         {
                             Id = "1121e9a5-f1f1-434b-a55d-bbe9d7a6b590",
                             AccessFailedCount = 0,
                             Bio = "I am Defult Auther",
-                            ConcurrencyStamp = "4d5d0c35-3a1f-4757-97bb-9abdc58c8c7c",
+                            ConcurrencyStamp = "60b5ca0e-6fe3-4430-8f17-4c178ff81991",
+                            CreateDate = new DateTime(2024, 5, 7, 0, 40, 55, 156, DateTimeKind.Local).AddTicks(4550),
                             Email = "Auther@gmil.com",
                             EmailConfirmed = true,
                             Firstname = "Astor",
@@ -137,19 +142,20 @@ namespace DAL.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "AUTHER@GMIL.COM",
                             NormalizedUserName = "AUTHER@GMIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBBw6ayt9AyFFFnrhfXcjlqCeVYfGJd2kljFGKzgf8ll7nTnllQ7kxB1q3mLbqnwLA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFb3+P0qxhFNNW7u5foWedn3FCYuwwQGphUIpVp6s1qa/O7DKHg+eVDzL5Qk2L4mSg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "09ab2b3f-bca9-431e-9d18-1660438944bc",
+                            SecurityStamp = "4d65f0bc-5935-4c47-a7ec-b9ad709184ec",
                             TwoFactorEnabled = false,
                             UserName = "Auther@gmil.com",
-                            isBlocked = true
+                            isBlocked = false
                         },
                         new
                         {
                             Id = "b178fae6-61f1-4b54-9480-021cf483faf8",
                             AccessFailedCount = 0,
                             Bio = "I am Defult User",
-                            ConcurrencyStamp = "54d94ed8-f9c5-4d96-b9cf-f34a1df67655",
+                            ConcurrencyStamp = "1df1f047-deba-4bc0-8790-2c19604c592c",
+                            CreateDate = new DateTime(2024, 5, 7, 0, 40, 55, 214, DateTimeKind.Local).AddTicks(3689),
                             Email = "User@gmil.com",
                             EmailConfirmed = true,
                             Firstname = "Astor",
@@ -157,12 +163,12 @@ namespace DAL.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@GMIL.COM",
                             NormalizedUserName = "USER@GMIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPd0CSAksS/qmlDN1iU/Gw+wOc1bjm/KtUvaG682gnXrxfr7EyzTP0zv4Osg+cHxkw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIN8+i40mmwOTP4sojBTzoM2oNHcePRkT2iRFL2qzeALoB1+t/1vqtBd/u8r2W1mww==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d8a2c028-900c-4888-b3e9-f45cf23343c8",
+                            SecurityStamp = "0ea43905-a82e-4069-adf0-29d152b99372",
                             TwoFactorEnabled = false,
                             UserName = "User@gmil.com",
-                            isBlocked = true
+                            isBlocked = false
                         });
                 });
 

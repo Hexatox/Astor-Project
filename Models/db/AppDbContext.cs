@@ -104,7 +104,8 @@ public class SeedUsersRoles
             Firstname = "Astor",
             Lastname = "Admin",
             Bio = "I am Defult Admin",
-            isBlocked = true
+            isBlocked = false,
+            CreateDate = DateTime.Now
         };
         adminUser.NormalizedUserName = adminUser.UserName.ToUpper();
         adminUser.NormalizedEmail = adminUser.Email.ToUpper();
@@ -119,7 +120,8 @@ public class SeedUsersRoles
             Firstname = "Astor",
             Lastname = "Auther",
             Bio = "I am Defult Auther",
-            isBlocked = true
+            isBlocked = false,
+            CreateDate = DateTime.Now
         };
         AutherUser.NormalizedUserName = AutherUser.UserName.ToUpper();
         AutherUser.NormalizedEmail = AutherUser.Email.ToUpper();
@@ -134,7 +136,8 @@ public class SeedUsersRoles
             Firstname = "Astor",
             Lastname = "User",
             Bio = "I am Defult User",
-            isBlocked = true
+            isBlocked = false,
+            CreateDate = DateTime.Now
         };
         UserUser.NormalizedUserName = UserUser.UserName.ToUpper();
         UserUser.NormalizedEmail = UserUser.Email.ToUpper();
