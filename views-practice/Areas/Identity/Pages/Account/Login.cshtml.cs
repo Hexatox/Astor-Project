@@ -68,7 +68,7 @@ namespace views_practice.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [EmailAddress]
+            [Display (Name = "البريد الإلكتروني او المعرف")]
             public string Email { get; set; }
 
             /// <summary>
@@ -109,22 +109,15 @@ namespace views_practice.Areas.Identity.Pages.Account
             returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
+            var username = new EmailAddressAttribute().IsValid(Input.Email) ? _userManager.FindByEmailAsync(Input.Email).Result.UserName : Input.Email;
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(username, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    var user = await _userManager.GetUserAsync(User);
-                    if (user.isBlocked == true)
-                    {
-                        _logger.LogInformation("User is Blocked");
-                        throw new NotImplementedException("this piece of code should be Implemented to Redicrect to the Correct page");
-                    }
-                    
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
