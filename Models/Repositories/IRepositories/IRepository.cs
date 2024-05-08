@@ -15,12 +15,15 @@ namespace DAL.Repositories.IRepositories
         Task<IEnumerable<T>> GetAllAsync();
         IEnumerable<T> Filter (Expression< Func<T, bool>> predicate);
         Task<IEnumerable<T>> FilterAsync (Expression< Func<T, bool>> predicate);
-        void Remove (T entity);
+        bool Remove (T entity);
+        Task<bool> RemoveAsync(T entity);
         void Add (T entity);
         Task AddAsync (T entity);
         Task<int> SaveAsync();
         int Save();
         T? Find(object id);
         Task<T?> FindAsync(object id);
+        void Update(T entity);
+        Task UpdateAsync(T entity);
     }
 }

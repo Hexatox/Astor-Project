@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -63,9 +64,23 @@ namespace DAL.Repositories
             return await appDbContext.Set<T>().ToListAsync();
         }
 
-        public void Remove(T entity)
+        public bool Remove(T entity)
         {
-            appDbContext.Set<T>().Remove(entity);
+            if (Find(entity) != null)
+            {
+                appDbContext.Set<T>().Remove(entity);
+                return true;
+            }
+            return false;
+        }
+        public async Task<bool> RemoveAsync(T entity)
+        {
+            if (await FindAsync(entity) != null)
+            {
+                appDbContext.Set<T>().Remove(entity);
+                return true;
+            }
+            return false;
         }
 
         public int Save()
@@ -76,6 +91,17 @@ namespace DAL.Repositories
         public async Task<int> SaveAsync()
         {
             return await appDbContext.SaveChangesAsync();
+        }
+
+        public void Update(T entity)
+        {
+            appDbContext.Set<T>().Update(entity);
+        }
+
+        public async Task UpdateAsync(T entity)
+        {
+            var t = Task.Run(() => appDbContext.Set<T>().Update(entity));
+            await t;
         }
     }
 }
