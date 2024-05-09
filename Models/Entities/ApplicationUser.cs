@@ -46,7 +46,7 @@ namespace DAL.Entities
         public string getFullName()
         {
             return Firstname; 
-    }
+        }
 
     }
 

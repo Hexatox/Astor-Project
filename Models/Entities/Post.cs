@@ -16,8 +16,11 @@ namespace DAL.Entities
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
         public DateTime PostDate { get; set; }
-        public int TotalLikes { get; set; }
-
+        public int TotalLikes
+        {
+            get { return totalLikes(); }
+            set { }
+        }
         public bool IsAviable {  get; set; }
 
         // navigate Likes
@@ -29,5 +32,9 @@ namespace DAL.Entities
 
         // navigate all  Comments post
         public IQueryable <Comment> Comments { get; set; }
+        private int totalLikes()
+        {
+            return Likes.Count();
+        }
     }
 }
