@@ -1,4 +1,8 @@
-﻿@{
+﻿@using views_practice.Models;
+@model HomePageMV ;
+
+@{
+
     ViewData["Title"] = "الرئيسية";
 
 }
@@ -74,7 +78,7 @@
     </div>
 </div>
 
-</div>
+
 
 <div class="  my-5 d-flex justify-content-center align-items-center flex-column items-center">
     <h4 class="mb-5">المقالات الأكثر رواجًا 🔥</h4>
@@ -83,7 +87,7 @@
         <div class="swiper-wrapper  ">
 
 
-            @for (int i = 0; i < 5; i++)
+            @foreach (var post in Model.Posts)
             {
                 <div class="swiper-slide">
                     <div class="card ">
@@ -96,18 +100,16 @@
                                   dy=".3em">Thumbnail</text>
                         </svg>
                         <div class="card-body">
-                            <h5>State Reducer Pattern in React</h5>
+                            <h5>@post.Title</h5>
                             <p class="card-text">
-                                رياكت تتميز بمرونتها الفكرية، حيث تُقدم للمطورين أدوات متعددة مع ترك الحرية لهم في اختيار
-                                كيفية بناء مشاريعهم. هاته الخاصية تجعل من ريكات مكتبة قوية ومرنة، مما تسمح بابتكار حلول
-                                مخصصة
+                                @post.Samary
                             </p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group gap-2 ">
                                     <img src="https://placehold.co/32x32" class="rounded " alt="...">
-                                    <small class="text-body ">اسم الكاتب</small>
+                                    <small class="text-body ">@post.User</small>
                                 </div>
-                                <small class="text-body-secondary">منذ يوم</small>
+                                <small class="text-body-secondary">@post.PostDate </small>
                             </div>
                         </div>
                     </div>
@@ -124,7 +126,7 @@
 
 </div>
 
-</div>
+
 
 <div class="album py-5 bg-body-tertiary">
     <div class="container d-flex justify-content-center align-items-center flex-column items-center">

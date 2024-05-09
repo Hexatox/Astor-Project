@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1 class="mt-5" >إنشاء مقالة جديدة</h1>
+
+<input placeholder="عنوان المقالة" />
+
+<div class=" w-100" id="editorjs"></div>
+
+<div >
+    <button onclick="saveContent" class="btn-primary" type="submit">نشر المقالة </button>
+</div>
+
+<script src="/lib/editorjs/dist/editorjs.mjs"></script>
+<script src="/lib/editorjs/dist/editorjs.umd.js"></script>
+<script src="/lib/editorjs/node_modules/@@editorjs/header/dist/header.mjs"></script>
+
+
+
+
+<script>
+    // Initialize Editor.js
+    const editor = new EditorJS({
+        /**
+         * Id of Element that should contain the Editor
+         */
+        holder: 'editorjs',
+
+        
+    })
+
+    // Function to handle submission of edited content
+    function saveContent() {
+        // Get content from Editor.js
+        editor.save().then((outputData) => {
+            // Send outputData to ASP.NET MVC controller
+            $.ajax({
+                url: '/YourController/SaveArticle',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(outputData),
+                success: function (response) {
+                    // Handle success response
+                },
+                error: function (xhr, status, error) {
+                    // Handle error
+                }
+            });
+        }).catch((error) => {
+            console.error('Error saving content:', error);
+        });
+    }
+</script>
+
+
