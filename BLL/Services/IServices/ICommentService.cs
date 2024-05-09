@@ -8,5 +8,6 @@ namespace BLL.Services.IServices
 {
     public interface ICommentService : IService
     {
+
     }
 }
