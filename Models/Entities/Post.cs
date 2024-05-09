@@ -34,7 +34,8 @@ namespace DAL.Entities
         public IQueryable <Comment> Comments { get; set; }
         private int totalLikes()
         {
-            return Likes.Count();
+            int count = Likes == null ? 0 : Likes.Count();
+            return count;
         }
     }
 }
