@@ -9,5 +9,6 @@ namespace DAL.Repositories.IRepositories
 {
     public interface IMessegeRepository : IRepository<Messege>
     {
+        public Task<List<Messege>> GetAllNavs();
     }
 }

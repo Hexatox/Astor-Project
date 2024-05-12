@@ -12,6 +12,10 @@ namespace DAL.Entities
 {
     public class ApplicationUser : IdentityUser // Inherite From `IdentityUser` this Contain All Proprity About Identity Like ID ,  PassWord , Email ... 
     {
+        public ApplicationUser()
+        {
+            
+        }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string Bio {  get; set; }
@@ -20,21 +24,21 @@ namespace DAL.Entities
         public DateTime CreateDate { get; set; }
 
         //navigation Propriry for his Sociel Media Links
-        public IQueryable <SocielMediaUser> Links { get; set; }
+        public ICollection<SocielMediaUser> Links { get; set; } = new List<SocielMediaUser>();
 
         // navigation to reprisent the all User Reviews 
-        public IQueryable <UserReview> Reviews { get; set; } 
+        public ICollection<UserReview> Reviews { get; set; } = new List<UserReview>();
 
         // navigattion of User Messeges
-        public IQueryable <Messege> Messeges {  get; set; }
+        public ICollection<Messege> Messeges { get; set; } = new List<Messege>();
         // navigate User POSTS
-        public IQueryable <Post> Posts { get; set; }
+        public ICollection<Post> Posts { get; set; } = new List<Post>();
 
         //navigate Users Commenrs
-        public IQueryable <Comment> Comments { get; set; }
-
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+            
         // navigate User Likes
-        public IQueryable <Like> Likes { get; set; }
+        public ICollection<Like> Likes { get; set; } = new List<Like>();
 
         // navigate User Request to be Admin 
         //public IQueryable <Request> Requests { get; set; }

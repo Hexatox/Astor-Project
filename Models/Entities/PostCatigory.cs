@@ -7,5 +7,9 @@
         
         public int CatigoryId { get; set; } 
         public Catigory Catigory { get; set; }
+        public PostCatigory()
+        {
+            
+        }
     }
 }

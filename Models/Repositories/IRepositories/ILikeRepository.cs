@@ -9,5 +9,6 @@ namespace DAL.Repositories.IRepositories
 {
     public interface ILikeRepository : IRepository <Like>
     {
+        public Task<List<Like>> GetAllNavs();
     }
 }

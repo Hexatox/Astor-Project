@@ -9,5 +9,6 @@ namespace DAL.Repositories.IRepositories
 {
     public interface IUserReviewRepository : IRepository<UserReview>
     {
+        public Task<List<UserReview>> GetAllNavs();
     }
 }

@@ -9,5 +9,6 @@ namespace DAL.Repositories.IRepositories
 {
     public interface IPostCatigoryRepository : IRepository <PostCatigory>
     {
+        public Task<List<PostCatigory>> GetAllNavs();
     }
 }

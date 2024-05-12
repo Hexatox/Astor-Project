@@ -4,6 +4,10 @@ namespace DAL.Entities
 {
     public class Comment
     {
+        public Comment()
+        {
+            
+        }
         public int CommentId { get; set; }
         
         public int PostId { get; set; }

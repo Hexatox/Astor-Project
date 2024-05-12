@@ -18,6 +18,14 @@ namespace DAL.Repositories
             this.appDbContext = appDbContext;
         }
 
+        public async Task<List<Catigory>> GetAllNavs()
+        {
+            var Itmes = await appDbContext.Catigories
+                .Include(c => c.Posts)
+                .ToListAsync();
+            return Itmes;
+        }
+
         public Catigory? GetCatigoryById(int id)
         {
             return Find(id);

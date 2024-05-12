@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Utility.Enum;
 
@@ -24,18 +25,22 @@ namespace DAL.Entities
         public bool IsAviable {  get; set; }
 
         // navigate Likes
-        public IQueryable<Like> Likes {  get; set; } 
+        public ICollection<Like> Likes { get; set; } = new List<Like>();
 
         // navigate post catigories
-        public IQueryable <Catigory> Catigories { get; set; }
+        public ICollection<Catigory> Catigories { get; set; } = new List<Catigory>();
 
 
         // navigate all  Comments post
-        public IQueryable <Comment> Comments { get; set; }
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
         private int totalLikes()
         {
             int count = Likes == null ? 0 : Likes.Count();
             return count;
+        }
+        public Post()
+        {
+            
         }
     }
 }

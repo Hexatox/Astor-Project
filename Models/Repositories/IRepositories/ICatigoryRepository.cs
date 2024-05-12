@@ -13,5 +13,7 @@ namespace DAL.Repositories.IRepositories
         public Catigory? GetCatigoryByName(string name);
         public Task<Catigory?> GetCatigoryByIdAsync(int id);
         public Catigory? GetCatigoryById(int id);
+        public Task<List<Catigory>> GetAllNavs();
+
     }
 }

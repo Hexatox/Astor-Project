@@ -1,6 +1,7 @@
 ﻿using DAL.db;
 using DAL.Entities;
 using DAL.Repositories.IRepositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,26 @@ namespace DAL.Repositories
         public PostRepository(AppDbContext appDbContext) : base(appDbContext)
         {
             this.appDbContext = appDbContext;
+        }
+
+        public async Task<List<Post>> GetAllNavs()
+        {
+            var items = await appDbContext.Posts
+                .Include(p => p.User)
+                .Include(p => p.Likes)
+                .Include(p => p.Comments)
+                .Include(p => p.Catigories)
+                .ToListAsync();
+            return items;
+        }
+
+        public async Task<Post> GetBy(int Id)
+        {
+            return await appDbContext.Posts.Include(p => p.User)
+                .Include(p => p.Likes)
+                .Include(p => p.Comments)
+                .Include(p => p.Catigories)
+                .FirstOrDefaultAsync(p => p.PostId == Id);
         }
     }
 }

@@ -9,5 +9,7 @@ namespace DAL.Repositories.IRepositories
 {
     public interface ISocielMediaUserRepository : IRepository <SocielMediaUser>
     {
+        public Task<List<SocielMediaUser>> GetAllNavs();
+
     }
 }

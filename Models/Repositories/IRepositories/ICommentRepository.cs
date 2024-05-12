@@ -9,5 +9,6 @@ namespace DAL.Repositories.IRepositories
 {
     public interface ICommentRepository : IRepository <Comment>
     {
+        public Task<List<Comment>> GetAllNavs();
     }
 }

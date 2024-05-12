@@ -9,6 +9,7 @@ namespace DAL.Repositories.IRepositories
 {
     public interface IPostRepository : IRepository<Post>
     {
-
+        Task<Post> GetBy(int Id);
+        public Task<List<Post>> GetAllNavs();
     }
 }

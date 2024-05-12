@@ -13,10 +13,10 @@ namespace views_practice.Areas.User.Controllers
         {
             this.postService = postService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            IEnumerable<Post> posts = postService.GetPage(0);
-            HomePageMV homePageMV  = new HomePageMV
+            IEnumerable<Post> posts = await postService.GetPageAsync(0);
+            HomePageMV homePageMV = new HomePageMV
             {
                 PageNumber = 0,
                 Posts = posts

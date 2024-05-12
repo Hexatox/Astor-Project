@@ -96,7 +96,7 @@ namespace BLL.Services
         /// <returns></returns>
         public async Task<IEnumerable<Post>> GetPageAsync(int pageNumber)
         {
-            IEnumerable<Post> posts = await postRepository.GetAllAsync();
+            IEnumerable<Post> posts = await postRepository.GetAllNavs();
             return await Task.FromResult(posts.Skip((pageNumber) * 10).Take(10));
         }
         /// <summary>
@@ -122,7 +122,7 @@ namespace BLL.Services
         /// <exception cref="Exception">Throws Exception when Post is not Exist</exception>
         public async Task<Post> GetPostByIdAsync(int postId)
         {
-            var post = await postRepository.FindAsync(postId);
+            var post = await postRepository.GetBy(postId);
             if (post == null)
             {
                 throw new Exception("Post not found");
