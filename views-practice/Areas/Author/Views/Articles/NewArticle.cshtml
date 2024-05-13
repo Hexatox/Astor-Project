@@ -3,55 +3,153 @@
 *@
 @{
 }
-<h1 class="mt-5" >إنشاء مقالة جديدة</h1>
 
-<input placeholder="عنوان المقالة" />
+@using DAL.Entities;
 
-<div class=" w-100" id="editorjs"></div>
 
-<div >
-    <button onclick="saveContent" class="btn-primary" type="submit">نشر المقالة </button>
+@model IEnumerable<Catigory>
+
+<div class="w-100 row">
+
+	<h1 class="mt-5">إنشاء مقالة جديدة</h1>
+
+	<form asp-area="Author" asp-controller="articles" asp-action="AddPost" >
+		<div class="form-group w-100 col-md-6">
+			<label id="Title">عنوان المقالة</label>
+			<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="عنوان المقالة ">
+			<small id="emailHelp" class="form-text text-muted">.اختر عنوانا مناسبا لمقالتك </small>
+		</div>
+
+
+		<div class="form-group">
+			<label id="Samary">وصف المقالة</label>
+			<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+		</div>
+
+
+		<div class="form-group">
+			<label id="Content">محتوى المقالة</label>
+			<div class="form-control w-100" id="editorjs"></div>
+		</div>
+
+		@* CATEGORIES *@
+		<div class="rounded border border-1 d-flex flex-wrap p-1 my-5 gap-1 justify-content-center ">
+			@foreach (var ctgr in Model)
+			{
+
+				<div class="d-flex border rounded gap-1 p-1">
+					<label> @ctgr.CatigoryName </label>
+					<input type="checkbox" />
+				</div>
+
+			}
+
+		</div>
+
+
+		<div>
+			<button onclick="saveContent()" class="btn btn-primary" type="submit">نشر المقالة </button>
+		</div>
+
+
+	</form>
+
+
+
+
+
+
+
+
+
+
 </div>
 
-<script src="/lib/editorjs/dist/editorjs.mjs"></script>
+
+
+<script type="module" src="/lib/editorjs/dist/editorjs.mjs"></script>
 <script src="/lib/editorjs/dist/editorjs.umd.js"></script>
-<script src="/lib/editorjs/node_modules/@@editorjs/header/dist/header.mjs"></script>
+
+
+<script type="module" src="/lib/editorjs/node_modules/@@editorjs/header/dist/header.mjs"></script>
+<script src="/lib/editorjs/node_modules/@@editorjs/header/dist/header.umd.js"></script>
+
+
+<script type="module" src="/lib/editorjs/node_modules/@@editorjs/Code/dist/Code.mjs"></script>
+<script src="/lib/editorjs/node_modules/@@editorjs/Code/dist/Code.umd.js"></script>
+
+
+<script type="module" src="/lib/editorjs/node_modules/@@editorjs/Code/dist/Code.mjs"></script>
+<script src="/lib/editorjs/node_modules/@@editorjs/Code/dist/Code.umd.js"></script>
 
 
 
+<script type="module" src="/lib/editorjs/node_modules/@@editorjs/delimiter/dist/delimiter.mjs"></script>
+<script src="/lib/editorjs/node_modules/@@editorjs/delimiter/dist/delimiter.umd.js"></script>
+
+
+
+<script type="module" src="/lib/editorjs/node_modules/@@editorjs/simple-image/dist/simple-image.mjs"></script>
+<script src="/lib/editorjs/node_modules/@@editorjs/simple-image/dist/simple-image.umd.js"></script>
 
 <script>
-    // Initialize Editor.js
-    const editor = new EditorJS({
-        /**
-         * Id of Element that should contain the Editor
-         */
-        holder: 'editorjs',
+	// Initialize Editor.js
+	const editor = new EditorJS({
+		/**
+		 * Id of Element that should contain the Editor
+		 */
+		holder: 'editorjs',
 
-        
-    })
+		tools: {
+			header: Header,
+			code: CodeTool,
+			delimiter: Delimiter,
+			image: SimpleImage
+		}
 
-    // Function to handle submission of edited content
-    function saveContent() {
-        // Get content from Editor.js
-        editor.save().then((outputData) => {
-            // Send outputData to ASP.NET MVC controller
-            $.ajax({
-                url: '/YourController/SaveArticle',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(outputData),
-                success: function (response) {
-                    // Handle success response
-                },
-                error: function (xhr, status, error) {
-                    // Handle error
-                }
-            });
-        }).catch((error) => {
-            console.error('Error saving content:', error);
-        });
-    }
+	})
+
+
+
+
+	// Function to handle submission of edited content
+	function saveContent() {
+
+		var artTitle = document.getElementById('Title').value;
+		var artSamary = document.getElementById('Samary').value;
+		var artContent = editor.save();
+
+
+
+
+		var postData = {
+			Title: artTitle,
+			Samary: artSamary,
+			Content: artContent
+		}
+
+
+
+		fetch("/author/articles/addPost", {
+			method: "POST",
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(postData)
+		}).then(data => {
+			// Handle the response from the server, if needed
+			console.log(data);
+			// Redirect to a success page or update UI as per your requirement
+		})
+
+
+
+
+	}
+
+
+
+
 </script>
 
 
