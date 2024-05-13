@@ -22,7 +22,7 @@ namespace views_practice.Areas.Author.Controllers
             return View();
         }
 
-        public async Task<IActionResult>  NewArticle ()
+        public async Task<IActionResult> NewArticle()
         {
             IEnumerable<Catigory> ctgrList = await catigoryService.GetAllAsync();
 
@@ -31,18 +31,23 @@ namespace views_practice.Areas.Author.Controllers
 
             return View(ctgrList);
         }
+        //      [HttpPost]
+        //      public IActionResult AddPost(Post post , List<int> cgtrIds)
+        //      {
+        //	return Ok(new { message = post.Title });
+
+
+
+        //}
         [HttpPost]
-        public IActionResult AddPost(Post post , List<Catigory > cgtrIds)
+        public IActionResult AddPost(Post post, List<int> categoryIds)
         {
-			return Ok(new { message = post.Title });
+            // Handle post data
+            return Ok(new { message = post.PostType });
+        }
 
 
-
-		}
-
-
-
-	}
+    }
 
 
 
