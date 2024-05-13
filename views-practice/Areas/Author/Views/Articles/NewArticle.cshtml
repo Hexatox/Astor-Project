@@ -1,155 +1,192 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-@using DAL.Entities;
-
+﻿@using DAL.Entities;
 
 @model IEnumerable<Catigory>
 
 <div class="w-100 row">
+    <h1 class="mt-5">Create a New Article</h1>
 
-	<h1 class="mt-5">إنشاء مقالة جديدة</h1>
+    <form id="articleForm" onsubmit="saveContent(event)">
+        <div class="form-group w-100 col-md-6">
+            <label for="title">Article Title</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Article Title">
+            <small class="form-text text-muted">Choose a suitable title for your article.</small>
+        </div>
 
-	<form asp-area="Author" asp-controller="articles" asp-action="AddPost" >
-		<div class="form-group w-100 col-md-6">
-			<label id="Title">عنوان المقالة</label>
-			<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="عنوان المقالة ">
-			<small id="emailHelp" class="form-text text-muted">.اختر عنوانا مناسبا لمقالتك </small>
-		</div>
+        <div class="form-group">
+            <label for="description">Article Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+        </div>
 
+        <div class="form-group">
+            <label for="content">Article Content</label>
+            <div class="form-control w-100" id="editorjs" name="content"></div>
+        </div>
 
-		<div class="form-group">
-			<label id="Samary">وصف المقالة</label>
-			<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-		</div>
+        <div class="rounded border border-1 d-flex flex-wrap p-1 my-5 gap-1 justify-content-center">
+            @foreach (var ctgr in Model)
+            {
+                <div class="d-flex border rounded gap-1 p-1">
+                    <label> @ctgr.CatigoryName </label>
+                    <input type="checkbox" />
+                    <label style="display :none;">@ctgr.CatigoryId</label>
+                </div>
+            }
+        </div>
 
-
-		<div class="form-group">
-			<label id="Content">محتوى المقالة</label>
-			<div class="form-control w-100" id="editorjs"></div>
-		</div>
-
-		@* CATEGORIES *@
-		<div class="rounded border border-1 d-flex flex-wrap p-1 my-5 gap-1 justify-content-center ">
-			@foreach (var ctgr in Model)
-			{
-
-				<div class="d-flex border rounded gap-1 p-1">
-					<label> @ctgr.CatigoryName </label>
-					<input type="checkbox" />
-				</div>
-
-			}
-
-		</div>
-
-
-		<div>
-			<button onclick="saveContent()" class="btn btn-primary" type="submit">نشر المقالة </button>
-		</div>
-
-
-	</form>
-
-
-
-
-
-
-
-
-
-
+        <div>
+            <button type="submit" class="btn btn-primary">Publish Article</button>
+        </div>
+    </form>
 </div>
-
-
 
 <script type="module" src="/lib/editorjs/dist/editorjs.mjs"></script>
 <script src="/lib/editorjs/dist/editorjs.umd.js"></script>
-
-
 <script type="module" src="/lib/editorjs/node_modules/@@editorjs/header/dist/header.mjs"></script>
 <script src="/lib/editorjs/node_modules/@@editorjs/header/dist/header.umd.js"></script>
-
-
 <script type="module" src="/lib/editorjs/node_modules/@@editorjs/Code/dist/Code.mjs"></script>
 <script src="/lib/editorjs/node_modules/@@editorjs/Code/dist/Code.umd.js"></script>
-
-
-<script type="module" src="/lib/editorjs/node_modules/@@editorjs/Code/dist/Code.mjs"></script>
-<script src="/lib/editorjs/node_modules/@@editorjs/Code/dist/Code.umd.js"></script>
-
-
-
 <script type="module" src="/lib/editorjs/node_modules/@@editorjs/delimiter/dist/delimiter.mjs"></script>
 <script src="/lib/editorjs/node_modules/@@editorjs/delimiter/dist/delimiter.umd.js"></script>
-
-
-
 <script type="module" src="/lib/editorjs/node_modules/@@editorjs/simple-image/dist/simple-image.mjs"></script>
 <script src="/lib/editorjs/node_modules/@@editorjs/simple-image/dist/simple-image.umd.js"></script>
 
 <script>
-	// Initialize Editor.js
-	const editor = new EditorJS({
-		/**
-		 * Id of Element that should contain the Editor
-		 */
-		holder: 'editorjs',
+    // Initialize Editor.js
+    const editor = new EditorJS({
+        holder: 'editorjs',
+        tools: {
+            header: Header,
+            code: CodeTool,
+            delimiter: Delimiter,
+            image: SimpleImage
+        }
+    })
 
-		tools: {
-			header: Header,
-			code: CodeTool,
-			delimiter: Delimiter,
-			image: SimpleImage
-		}
+    // Function to handle submission of edited content
+    async function saveContent(event) {
+        event.preventDefault(); // Prevent form submission
 
-	})
+        const title = document.getElementById('title').value;
+        const description = document.getElementById('description').value;
+        const content = await editor.save(); // Wait for Editor.js content saving
 
+        const postData = {
+            title: title,
+            description: description,
+            content: JSON.stringify(content)
+        };
 
+        try {
+            const response = await fetch("/author/articles/AddPost", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postData)
+            });
 
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
 
-	// Function to handle submission of edited content
-	function saveContent() {
-
-		var artTitle = document.getElementById('Title').value;
-		var artSamary = document.getElementById('Samary').value;
-		var artContent = editor.save();
-
-
-
-
-		var postData = {
-			Title: artTitle,
-			Samary: artSamary,
-			Content: artContent
-		}
-
-
-
-		fetch("/author/articles/addPost", {
-			method: "POST",
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(postData)
-		}).then(data => {
-			// Handle the response from the server, if needed
-			console.log(data);
-			// Redirect to a success page or update UI as per your requirement
-		})
-
-
-
-
-	}
-
-
-
-
+            const data = await response.json();
+            console.log(data); // Log response data
+            // Redirect to success page or update UI as needed
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+            // Handle errors or show error message to the user
+        }
+    }
 </script>
+@* @model IEnumerable<Catigory>
 
+<div class="w-100 row">
+    <h1 class="mt-5">Create a New Article</h1>
 
+    <form id="articleForm" onsubmit="saveContent(event)">
+        <div class="form-group w-100 col-md-6">
+            <label for="title">Article Title</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Article Title">
+            <small class="form-text text-muted">Choose a suitable title for your article.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Article Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="content">Article Content</label>
+            <div class="form-control w-100" id="editorjs" name="content"></div>
+        </div>
+
+        <div class="rounded border border-1 d-flex flex-wrap p-1 my-5 gap-1 justify-content-center">
+            @foreach (var ctgr in Model)
+            {
+                <div class="d-flex border rounded gap-1 p-1">
+                    <label> @ctgr.CatigoryName </label>
+                    <input type="checkbox" name="cgtrIds" value="@ctgr.CatigoryId" />
+                    <!-- Use the category ID as the value -->
+                </div>
+            }
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Publish Article</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Initialize Editor.js
+    const editor = new EditorJS({
+        holder: 'editorjs',
+        tools: {
+            header: Header,
+            code: CodeTool,
+            delimiter: Delimiter,
+            image: SimpleImage
+        }
+    })
+
+    // Function to handle submission of edited content
+    async function saveContent(event) {
+        event.preventDefault(); // Prevent form submission
+
+        const title = document.getElementById('title').value;
+        const description = document.getElementById('description').value;
+        const content = await editor.save(); // Wait for Editor.js content saving
+
+        const categoryCheckboxes = document.querySelectorAll('input[name="cgtrIds"]:checked');
+        const categoryIds = Array.from(categoryCheckboxes).map(checkbox => parseInt(checkbox.value));
+
+        const postData = {
+            title: title,
+            description: description,
+            content: JSON.stringify(content),
+            cgtrIds: categoryIds
+        };
+
+        try {
+            const response = await fetch("/YourController/AddPost", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postData)
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            console.log(data); // Log response data
+            // Redirect to success page or update UI as needed
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+            // Handle errors or show error message to the user
+        }
+    }
+</script>
+  *@

@@ -32,7 +32,7 @@ namespace views_practice.Areas.Author.Controllers
             return View(ctgrList);
         }
         [HttpPost]
-        public IActionResult AddPost(Post post )
+        public IActionResult AddPost(Post post , List<Catigory > cgtrIds)
         {
 			return Ok(new { message = post.Title });
 
