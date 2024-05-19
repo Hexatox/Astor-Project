@@ -19,8 +19,8 @@ namespace views_practice.Utility
 
             try
             {
-                var blobConnectionString = configuration.GetConnectionString("BlodConnectionString");  
-                var containerName = configuration["BlodContainerName"];  
+                var blobConnectionString = Environment.GetEnvironmentVariable ("BlodConnectionString");  
+                var containerName = Environment.GetEnvironmentVariable("BlodContainerName");  
 
                 var blobContainerClient = new BlobContainerClient(blobConnectionString, containerName);
                 var blobClient = blobContainerClient.GetBlobClient(file.FileName);
