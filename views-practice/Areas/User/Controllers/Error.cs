@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace views_practice.Controllers
+namespace views_practice.Areas.User.Controllers
 {
 
 
@@ -9,7 +9,7 @@ namespace views_practice.Controllers
     {
 
 
-      public  IActionResult notFound()
+        public IActionResult notFound()
         {
             return View();
         }

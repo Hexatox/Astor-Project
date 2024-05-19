@@ -5,7 +5,7 @@ using views_practice.Models;
 
 namespace views_practice.Areas.User.Controllers
 {
-    [Area ("User")]
+    
     public class HomeController : Controller
     {
         private readonly IPostService postService;
@@ -13,6 +13,9 @@ namespace views_practice.Areas.User.Controllers
         {
             this.postService = postService;
         }
+
+
+        [Area("User")]
         public async Task<IActionResult> Index()
         {
             IEnumerable<Post> posts = await postService.GetPageAsync(0);

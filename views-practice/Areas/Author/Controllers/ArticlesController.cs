@@ -42,8 +42,12 @@ namespace views_practice.Areas.Author.Controllers
         [HttpPost]
         public IActionResult AddPost(Post post, List<int> categoryIds)
         {
-            // Handle post data
-            return Ok(new { message = post.PostType });
+            if (ModelState.IsValid)
+            
+                return Ok(new { message = post.PostType });
+            return BadRequest();
+           
+           
         }
 
 

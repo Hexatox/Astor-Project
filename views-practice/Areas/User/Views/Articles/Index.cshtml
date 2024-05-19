@@ -1,0 +1,105 @@
+﻿@using Humanizer
+@model HomePageMV;
+@using DAL.Entities;
+
+<div class="d-flex flex-column gap-2 justify-content-center align-items-center  mt-5">
+	<h1>
+		اقرأ لتتعلم .. وتعلم لتنجح 🌠
+	</h1>
+
+	<h4 class="text-center fs-5 p-4 px-4">انضم لرحلة تعلم فريدة وممتعة باللغة العربية تضمن لك النجاح من خلال محتوى تقني متميز في مختلف مجالات هندسة البرمجيات</h4>
+</div>
+
+
+
+<div class="album py-5 bg-body-tertiary">
+
+
+
+	<div class="container d-flex justify-content-center align-items-center flex-column items-center ">
+		<h4 class="mb-5">تصفح الآن كافة المواضيع ⚡️</h4>
+		<div id="blog-container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+			@foreach (var post in Model.Posts)
+			{
+				<div class="col">
+					<div class="card shadow-sm">
+						<img class="bd-placeholder-img card-img-top" height="225"
+							 src="@post.Image" alt="post image" />
+						<div class="card-body">
+							<h5>@post.Title</h5>
+							<p class="card-text">@post.Samary
+							</p>
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="btn-group gap-2 ">
+									<img src="https://mighty.tools/mockmind-api/content/human/65.jpg" width="32px" height="32px" class="rounded " alt="...">
+									<small class="text-body ">@post.User.Firstname @post.User.Lastname </small>
+								</div>
+
+								<small class="text-body-secondary d-flex justify-content-center align items-center">
+									<i class='bx bx-xs bx-time-five'></i> @post.PostDate.Humanize(culture: new System.Globalization.CultureInfo("ar"))
+								</small>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			}
+
+
+
+
+
+
+		</div>
+
+		<button onclick="click_loadmore(0,5)" class="btn btn-dark mt-5">عرض المزيد</button>
+	</div>
+</div>
+
+
+
+<script>
+	var blogcontainer = document.getElementById("blog-container")
+
+
+	async function click_loadmore(step, count) {
+		await fetch('/User/Articles/LoadMoreArticlesCards', {
+			method: 'GET',
+			headers: {
+				"Content-Type": "application/json"
+			}
+		}).then(() => {
+
+
+			blogcontainer.innerHTML += `<div class="swiper-slide">
+												<div class="card ">
+													<img class="bd-placeholder-img card-img-top"  height="225"
+														 src="${post.Image}" />
+
+
+													<div class="card-body">
+														<h5>${post.Title}</h5>
+														<p class="card-text">
+																${post.Samary}
+														</p>
+															<div class="d-flex justify-content-between align-items-center">
+															<div class="btn-group gap-2 ">
+																		<img src="${post.User.ProfilePhoto.URL}" class="rounded " alt="...">
+																<small class="text-body ">${post.User.Firstname}</small>
+																</div>
+															<small class="text-body-secondary">post.PostDate.Humanize() </small>
+														</div>
+													</div>
+												</div>
+											</div>`
+
+		})
+	}
+
+
+
+
+
+</script>

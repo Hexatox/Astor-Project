@@ -106,7 +106,7 @@
                                     <img src="https://placehold.co/32x32" class="rounded " alt="...">
                                     <small class="text-body ">@post.User.Firstname</small>
                                 </div>
-                                <small class="text-body-secondary">@post.PostDate.Humanize() </small>
+                                <small class="text-body-secondary">@post.PostDate.Humanize( culture: new System.Globalization.CultureInfo("ar")) </small>
                             </div>
                         </div>
                     </div>
@@ -130,33 +130,25 @@
         <h4 class="mb-5">تصفح الآن كافة المواضيع ⚡️</h4>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-            @for (int i = 0; i < 7; i++)
+            @foreach (var post in Model.Posts)
             {
                 <div class="col">
                     <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                             preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#55595c"></rect>
-                            <text x="50%" y="50%" fill="#eceeef"
-                                  dy=".3em">Thumbnail</text>
-                        </svg>
+                        <img class="bd-placeholder-img card-img-top" height="225"
+                             src="@post.Image" alt="post image" />
                         <div class="card-body">
-                            <h5>State Reducer Pattern in React</h5>
+                            <h5>@post.Title</h5>
                             <p class="card-text">
-                                رياكت تتميز بمرونتها الفكرية، حيث تُقدم للمطورين أدوات متعددة مع ترك الحرية لهم في اختيار
-                                كيفية بناء مشاريعهم. هاته الخاصية تجعل من ريكات مكتبة قوية ومرنة، مما تسمح بابتكار حلول
-                                مخصصة
+                                @post.Samary
                             </p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group gap-2 ">
-                                    <img src="https://placehold.co/32x32" class="rounded " alt="...">
-                                    <small class="text-body ">اسم الكاتب</small>
+                                    <img src="https://mighty.tools/mockmind-api/content/human/65.jpg" width="32px" height="32px" class="rounded " alt="...">
+                                    <small class="text-body ">@post.User.Firstname @post.User.Lastname </small>
                                 </div>
 
                                 <small class="text-body-secondary d-flex justify-content-center align items-center">
-                                    <i class='bx bx-xs bx-time-five'></i> منذ يوم
+                                    <i class='bx bx-xs bx-time-five'></i> @post.PostDate.Humanize(culture: new System.Globalization.CultureInfo("ar"))
                                 </small>
                             </div>
                         </div>
