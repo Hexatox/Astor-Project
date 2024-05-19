@@ -1,4 +1,5 @@
 ﻿@using views_practice.Models;
+@using Humanizer;
 @model HomePageMV ;
 
 @{
@@ -91,14 +92,11 @@
             {
                 <div class="swiper-slide">
                     <div class="card ">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                        <img class="bd-placeholder-img card-img-top" width="100%" height="225"
                              xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                             preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#55595c"></rect>
-                            <text x="50%" y="50%" fill="#eceeef"
-                                  dy=".3em">Thumbnail</text>
-                        </svg>
+                             preserveAspectRatio="xMidYMid slice" focusable="false" src="@post.Image">
+                         
+                        </img>
                         <div class="card-body">
                             <h5>@post.Title</h5>
                             <p class="card-text">
@@ -109,7 +107,7 @@
                                     <img src="https://placehold.co/32x32" class="rounded " alt="...">
                                     <small class="text-body ">@post.User.Firstname</small>
                                 </div>
-                                <small class="text-body-secondary">@post.PostDate </small>
+                                <small class="text-body-secondary">@post.PostDate.Humanize() </small>
                             </div>
                         </div>
                     </div>
