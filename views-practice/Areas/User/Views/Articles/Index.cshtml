@@ -20,33 +20,7 @@
 		<h4 class="mb-5">تصفح الآن كافة المواضيع ⚡️</h4>
 		<div id="blog-container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-			@foreach (var post in Model.Posts)
-			{
-				<div class="col">
-					<div class="card shadow-sm">
-						<img class="bd-placeholder-img card-img-top" height="225"
-							 src="@post.Image" alt="post image" />
-						<div class="card-body">
-							<h5>@post.Title</h5>
-							<p class="card-text">
-								@post.Samary
-							</p>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group gap-2 ">
-									<img src="https://mighty.tools/mockmind-api/content/human/65.jpg" width="32px" height="32px" class="rounded " alt="...">
-									<small class="text-body ">@post.User.Firstname @post.User.Lastname </small>
-								</div>
-
-								<small class="text-body-secondary d-flex justify-content-center align items-center">
-									<i class='bx bx-xs bx-time-five'></i> @post.PostDate.Humanize(culture: new System.Globalization.CultureInfo("ar"))
-								</small>
-							</div>
-						</div>
-					</div>
-
-
-				</div>
-			}
+			<partial model="@Model.Posts" name="_PostsPartialView" />
 
 
 
