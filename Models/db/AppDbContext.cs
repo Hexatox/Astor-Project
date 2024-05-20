@@ -91,7 +91,7 @@ public class SeedUsersRoles
     private List<ApplicationUser> GetUsers()
     {
 
-        string pwd = "DefaultPasword12??";
+        string pwd = Environment.GetEnvironmentVariable("pwd");
         var passwordHasher = new PasswordHasher<ApplicationUser>();
 
         // Seed Users

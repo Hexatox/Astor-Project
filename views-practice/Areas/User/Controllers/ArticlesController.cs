@@ -50,12 +50,16 @@ namespace views_practice.Areas.User.Controllers
 		{
 
 
+			if (ModelState.IsValid)
+			{
+				var records = await postService.GetPageAsync(0);
 
 
-			var records = await postService.GetPageAsync(0); 
-				
+				return PartialView("_PostsPartialView", records);
+			}
 
-			return PartialView("_PostsPartialView", records);
+
+			return BadRequest();
 
 
 

@@ -4,7 +4,9 @@ namespace views_practice.Areas.User.Controllers
 {
     public class ContactUsController : Controller
     {
-        public IActionResult Index()
+
+		[Area("User")]
+		public IActionResult Index()
         {
             return View();
         }
