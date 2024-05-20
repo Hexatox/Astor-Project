@@ -28,7 +28,8 @@
 							 src="@post.Image" alt="post image" />
 						<div class="card-body">
 							<h5>@post.Title</h5>
-							<p class="card-text">@post.Samary
+							<p class="card-text">
+								@post.Samary
 							</p>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group gap-2 ">
@@ -54,52 +55,36 @@
 
 		</div>
 
-		<button onclick="click_loadmore(0,5)" class="btn btn-dark mt-5">عرض المزيد</button>
+		<button  id="showmore" class="btn btn-dark mt-5">عرض المزيد</button>
 	</div>
 </div>
 
 
 
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
 <script>
-	var blogcontainer = document.getElementById("blog-container")
+	var page = 2 ; 
+	var pageSize = 5 ; 
 
 
-	async function click_loadmore(step, count) {
-		await fetch('/User/Articles/LoadMoreArticlesCards', {
-			method: 'GET',
-			headers: {
-				"Content-Type": "application/json"
+	$("#showmore").click(function ()  {
+		$.ajax({
+			url: `/User/Articles/LoadMoreArticlesCards?page=${page}&pageSize=${pageSize}`,
+			success : function (data) {
+				$("#blog-container").append(data);
+				page++ ; 
 			}
-		}).then(() => {
-
-
-			blogcontainer.innerHTML += `<div class="swiper-slide">
-												<div class="card ">
-													<img class="bd-placeholder-img card-img-top"  height="225"
-														 src="${post.Image}" />
-
-
-													<div class="card-body">
-														<h5>${post.Title}</h5>
-														<p class="card-text">
-																${post.Samary}
-														</p>
-															<div class="d-flex justify-content-between align-items-center">
-															<div class="btn-group gap-2 ">
-																		<img src="${post.User.ProfilePhoto.URL}" class="rounded " alt="...">
-																<small class="text-body ">${post.User.Firstname}</small>
-																</div>
-															<small class="text-body-secondary">post.PostDate.Humanize() </small>
-														</div>
-													</div>
-												</div>
-											</div>`
-
 		})
-	}
+	})
+	
 
 
 
 
 
 </script>
+
+
+

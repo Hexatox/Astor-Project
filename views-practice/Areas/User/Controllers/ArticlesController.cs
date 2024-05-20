@@ -16,39 +16,49 @@ using views_practice.Models;
 
 namespace views_practice.Areas.User.Controllers
 {
-    public class ArticlesController : Controller
-    {
-        private readonly IPostService postService;
-        public ArticlesController(IPostService postService)
-        {
-            this.postService = postService;
-        }
+	public class ArticlesController : Controller
+	{
+		private readonly IPostService postService;
+		public ArticlesController(IPostService postService)
+		{
+			this.postService = postService;
+		}
 
 
 
 
 
-        [Area("User")]
-        public async Task<IActionResult> Index()
-        {
+		[Area("User")]
+		public async Task<IActionResult> Index()
+		{
 			IEnumerable<Post> posts = await postService.GetPageAsync(0);
 			HomePageMV homePageMV = new HomePageMV
 			{
 				PageNumber = 0,
 				Posts = posts
 			};
-            return View(homePageMV);
+			return View(homePageMV);
 
 
 
-		
-        }
 
-        [HttpGet]
-        [Area("User")]
-        public void  LoadMoreArticlesCards()
-        {
-          
-        }
-    }
+		}
+
+		[HttpGet]
+		[Area("User")]
+		public async Task<IActionResult> LoadMoreArticlesCards(int page = 1, int pageSize = 5)
+		{
+
+
+
+
+			var records = await postService.GetPageAsync(0); 
+				
+
+			return PartialView("_PostsPartialView", records);
+
+
+
+		}
+	}
 }
