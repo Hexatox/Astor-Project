@@ -2,43 +2,43 @@
 @model IEnumerable<Catigory>
 
 <div class="w-100 row">
-    <h1 class="mt-5">Create a New Article</h1>
+	<h1 class="mt-5">Create a New Article</h1>
 
-    <form id="articleForm" method="post" action="/author/articles/AddPost">
-        <div class="form-group w-100 col-md-6">
-            <label for="title">Article Title</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Article Title">
-            <small class="form-text text-muted">Choose a suitable title for your article.</small>
-        </div>
+	<form id="articleForm"   >
+		<div class="form-group w-100 col-md-6">
+			<label for="title">Article Title</label>
+			<input type="text" class="form-control" id="title" name="title" placeholder="Article Title">
+			<small class="form-text text-muted">Choose a suitable title for your article.</small>
+		</div>
 
-        <div class="form-group">
-            <label for="Samary	">Article Summary</label>
-            <textarea class="form-control" id="Samary" name="Samary" rows="3"></textarea>
-        </div>
+		<div class="form-group">
+			<label for="Samary	">Article Summary</label>
+			<textarea class="form-control" id="samary" name="samary" rows="3"></textarea>
+		</div>
 
-        <div class="form-group">
-            <label for="content">Article Content</label>
-            <div class="form-control w-100" id="editorjs" name="content"></div>
-            <input type="hidden" id="content" name="content" /> <!-- Hidden field to store Editor.js content -->
-        </div>
+		<div class="form-group">
+			<label for="content">Article Content</label>
+			<div class="form-control w-100" id="editorjs" name="content"></div>
+			<input type="hidden" id="content" name="content" /> <!-- Hidden field to store Editor.js content -->
+		</div>
 
-        <div class="rounded border border-1 d-flex flex-wrap p-1 my-5 gap-1 justify-content-center">
-            @foreach (var ctgr in Model)
-            {
-                <div class="d-flex border rounded gap-1 p-1">
-                    <label> @ctgr.CatigoryName </label>
-                    <input type="checkbox" name="categoryIds" value="@ctgr.CatigoryId" />
-                </div>
-            }
-        </div>
+		<div class="rounded border border-1 d-flex flex-wrap p-1 my-5 gap-1 justify-content-center">
+			@foreach (var ctgr in Model)
+			{
+				<div class="d-flex border rounded gap-1 p-1">
+					<label> @ctgr.CatigoryName </label>
+					<input type="checkbox" name="categoryIds" value="@ctgr.CatigoryId" />
+				</div>
+			}
+		</div>
 
-        <!-- Hidden input field to store selected category IDs -->
-        <input type="hidden" id="categoryIds" name="categoryIds" />
+		<!-- Hidden input field to store selected category IDs -->
+		<input type="hidden" id="categoryIds" name="categoryIds" />
 
-        <div>
-            <button type="button" onclick="submitForm()" class="btn btn-primary">Publish Article</button> <!-- Changed onclick function to submitForm -->
-        </div>
-    </form>
+		<div>
+			<button type="button" onclick=" await submitForm()" class="btn btn-primary">Publish Article</button> <!-- Changed onclick function to submitForm -->
+		</div>
+	</form>
 </div>
 <script type="module" src="/lib/editorjs/dist/editorjs.mjs"></script>
 <script src="/lib/editorjs/dist/editorjs.umd.js"></script>
@@ -50,45 +50,93 @@
 <script src="/lib/editorjs/node_modules/@@editorjs/delimiter/dist/delimiter.umd.js"></script>
 <script type="module" src="/lib/editorjs/node_modules/@@editorjs/simple-image/dist/simple-image.mjs"></script>
 <script src="/lib/editorjs/node_modules/@@editorjs/simple-image/dist/simple-image.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@@11"></script>
+
 <script>
-    // Initialize Editor.js
-    const editor = new EditorJS({
-        holder: 'editorjs',
-        tools: {
-            header: {
-                class: Header,
-                inlineToolbar: true
-            },
-            image: {
-                class: SimpleImage,
-                inlineToolbar: true
-            },
-            code: {
-                class: CodeTool,
-                inlineToolbar: true
-            },
-            delimiter:{
-class: Delimiter,
-                inlineToolbar: true
-            }
-        }
-    });
+	// Initialize Editor.js
+	const editor = new EditorJS({
+		holder: 'editorjs',
+		tools: {
+			header: {
+				class: Header,
+				inlineToolbar: true
+			},
+			image: {
+				class: SimpleImage,
+				inlineToolbar: true
+			},
+			code: {
+				class: CodeTool,
+				inlineToolbar: true
+			},
+			delimiter: {
+				class: Delimiter,
+				inlineToolbar: true
+			}
+		}
+	});
 
-    // Custom form submission to include Editor.js content
-    async function submitForm() {
-        const title = document.getElementById('title').value;
-        const summary = document.getElementById('Samary').value;
-        const categoryIds = Array.from(document.querySelectorAll('input[name="categoryIds"]:checked')).map(checkbox => checkbox.value);
 
-        const editorContent = await editor.save();
+	 async  function  submitForm() {
 
-        // Set the Editor.js content as the value of the hidden input field in the form
-        document.getElementById('content').value = JSON.stringify(editorContent);
 
-        // Set the selected category IDs in the hidden input field
-        document.getElementById('categoryIds').value = JSON.stringify(categoryIds);
 
-        // Submit the form programmatically
-        document.getElementById('articleForm').submit();
-    }
+		Swal.fire({
+			title: "Do you want to save the changes?",
+			showDenyButton: true,
+			showCancelButton: true,
+			confirmButtonText: "Save",
+			denyButtonText: `Don't save`
+		}).then((result) => {
+			/* Read more about isConfirmed, isDenied below */
+			if (result.isConfirmed) {
+
+
+				const formData = {
+					title: document.getElementById('title').value,
+					samary: document.getElementById('samary').value,
+					content: JSON.stringify(await editor.save()),
+					categoryIds: [] // Initialize empty array for category IDs
+				};
+
+				// Get selected category IDs
+				const checkboxes = document.querySelectorAll('input[name="categoryIds"]:checked');
+				checkboxes.forEach(checkbox => {
+					formData.categoryIds.push(checkbox.value);
+				});
+
+
+
+
+
+				// Send POST request
+				await fetch('/Author/Articles/AddPost', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(formData)
+				})
+					.then(response => {
+						console.log(response)
+					})
+					.then(data => {
+						// Handle success response
+						Swal.fire("Saved!", "", "success");
+						// Optionally, redirect or display a success message
+					})
+					.catch(error => {
+						// Handle error
+						console.error('Error publishing article:', error);
+						// Optionally, display an error message to the user
+					});
+				
+			} else if (result.isDenied) {
+				Swal.fire("Changes are not saved", "", "info");
+			}
+		});
+		// Gather form data
+		
+	}
+
 </script>
