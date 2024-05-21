@@ -16,11 +16,24 @@ namespace BLL.Services
         {
             this.postRepository = postRepository;
         }
-        /// <summary>
-        /// Create Post 
-        /// </summary>
-        /// <param name="post"></param>
-        public void CreatePost(Post post)
+
+		public void AddPost(Post post)
+		{
+			postRepository.Add(post);
+            postRepository.Save();
+		}
+
+		public async Task AddPostAsync(Post post)
+		{
+            await postRepository.AddAsync(post);
+            await postRepository.SaveAsync();
+		}
+
+		/// <summary>
+		/// Create Post 
+		/// </summary>
+		/// <param name="post"></param>
+		public void CreatePost(Post post)
         {
             post.PostDate = DateTime.Now;
             postRepository.Add(post);

@@ -1,4 +1,4 @@
-﻿@using DAL.Entities;
+﻿@* @using DAL.Entities;
 @model IEnumerable<Catigory>
 
 <div class="w-100 row">
@@ -140,3 +140,223 @@
 	}
 
 </script>
+ *@
+@* @using DAL.Entities;
+@model IEnumerable<Catigory>
+
+<div class="w-100 row">
+	<h1 class="mt-5">Create a New Article</h1>
+
+	<form id="articleForm" method="post" action="/author/articles/AddPost">
+		<div class="form-group w-100 col-md-6">
+			<label for="title">Article Title</label>
+			<input type="text" class="form-control" id="title" name="title" placeholder="Article Title">
+			<small class="form-text text-muted">Choose a suitable title for your article.</small>
+		</div>
+
+		<div class="form-group">
+			<label for="Samary">Article Summary</label>
+			<textarea class="form-control" id="Samary" name="Samary" rows="3"></textarea>
+		</div>
+
+		<div class="form-group">
+			<label for="content">Article Content</label>
+			<div class="form-control w-100" id="editorjs" name="content"></div>
+			<input type="hidden" id="content" name="content" /> <!-- Hidden field to store Editor.js content -->
+		</div>
+		<div class="form-group">
+			<label for="image">image</label>
+			<input type="image" class="form-control" id="image" name="image"/>
+		</div>
+		<div class="rounded border border-1 d-flex flex-wrap p-1 my-5 gap-1 justify-content-center">
+			@foreach (var category in Model)
+			{
+				<div class="d-flex border rounded gap-1 p-1">
+					<label> @category.CatigoryName </label>
+					<input type="checkbox" name="categoryIds" value="@category.CatigoryId" />
+				</div>
+			}
+		</div>
+
+		<!-- Hidden input field to store selected category IDs -->
+		<input type="hidden" id="categoryIds" name="categoryIds" />
+
+		<div>
+			<button type="button" id="publishButton" class="btn btn-primary">Publish Article</button> <!-- Changed onclick function to submitForm -->
+		</div>
+	</form>
+</div>
+
+<script type="module" src="/lib/editorjs/dist/editorjs.mjs"></script>
+<script src="/lib/editorjs/dist/editorjs.umd.js"></script>
+<script type="module" src="/lib/editorjs/node_modules/@@editorjs/header/dist/header.mjs"></script>
+<script src="/lib/editorjs/node_modules/@@editorjs/header/dist/header.umd.js"></script>
+<script type="module" src="/lib/editorjs/node_modules/@@editorjs/Code/dist/Code.mjs"></script>
+<script src="/lib/editorjs/node_modules/@@editorjs/Code/dist/Code.umd.js"></script>
+<script type="module" src="/lib/editorjs/node_modules/@@editorjs/delimiter/dist/delimiter.mjs"></script>
+<script src="/lib/editorjs/node_modules/@@editorjs/delimiter/dist/delimiter.umd.js"></script>
+<script type="module" src="/lib/editorjs/node_modules/@@editorjs/simple-image/dist/simple-image.mjs"></script>
+<script src="/lib/editorjs/node_modules/@@editorjs/simple-image/dist/simple-image.umd.js"></script>
+
+<script>
+	// Initialize Editor.js
+	const editor = new EditorJS({
+		holder: 'editorjs',
+		tools: {
+			header: {
+				class: Header,
+				inlineToolbar: true
+			},
+			image: {
+				class: SimpleImage,
+				inlineToolbar: true
+			},
+			code: {
+				class: CodeTool,
+				inlineToolbar: true
+			},
+			delimiter: {
+				class: Delimiter,
+				inlineToolbar: true
+			}
+		}
+	});
+
+	// Custom form submission to include Editor.js content
+	document.getElementById('publishButton').addEventListener('click', async function () {
+		const title = document.getElementById('title').value;
+		const summary = document.getElementById('Samary').value;
+		const categoryIds = Array.from(document.querySelectorAll('input[name="categoryIds"]:checked')).map(checkbox => checkbox.value);
+		const image = document.getElementById('image').value;
+		
+		const editorContent = await editor.save();
+
+		// Set the Editor.js content as the value of the hidden input field in the form
+		document.getElementById('content').value = JSON.stringify(editorContent);
+
+		// Set the selected category IDs in the hidden input field
+		document.getElementById('categoryIds').value = JSON.stringify(categoryIds);
+
+		// Submit the form programmatically
+		document.getElementById('articleForm').submit();
+	});
+</script>
+
+ *@
+@using DAL.Entities;
+@model IEnumerable<Catigory>
+
+<div class="w-100 row">
+	<h1 class="mt-5">Create a New Article</h1>
+
+	<form id="articleForm" method="post" action="/author/articles/AddPost" enctype="multipart/form-data">
+		<div class="form-group w-100 col-md-6">
+			<label for="title">Article Title</label>
+			<input type="text" class="form-control" id="title" name="title" placeholder="Article Title">
+			<small class="form-text text-muted">Choose a suitable title for your article.</small>
+		</div>
+
+		<div class="form-group">
+			<label for="Samary">Article Summary</label>
+			<textarea class="form-control" id="Samary" name="Samary" rows="3"></textarea>
+		</div>
+
+		<div class="form-group">
+			<label for="content">Article Content</label>
+			<div class="form-control w-100" id="editorjs" name="content"></div>
+			<input type="hidden" id="content" name="content" /> <!-- Hidden field to store Editor.js content -->
+		</div>
+		<div class="form-group">
+			<label for="image">Image</label>
+			<input type="file" class="form-control" id="image" name="image" />
+		</div>
+		<div class="rounded border border-1 d-flex flex-wrap p-1 my-5 gap-1 justify-content-center">
+			@foreach (var category in Model)
+			{
+				<div class="d-flex border rounded gap-1 p-1">
+					<label> @category.CatigoryName </label>
+					<input type="checkbox" name="categoryIds" value="@category.CatigoryId" />
+				</div>
+			}
+		</div>
+
+		<div>
+			<button type="button" id="publishButton" class="btn btn-primary">Publish Article</button>
+		</div>
+	</form>
+</div>
+
+<script type="module" src="/lib/editorjs/dist/editorjs.mjs"></script>
+<script src="/lib/editorjs/dist/editorjs.umd.js"></script>
+<script type="module" src="/lib/editorjs/node_modules/@@editorjs/header/dist/header.mjs"></script>
+<script src="/lib/editorjs/node_modules/@@editorjs/header/dist/header.umd.js"></script>
+<script type="module" src="/lib/editorjs/node_modules/@@editorjs/Code/dist/Code.mjs"></script>
+<script src="/lib/editorjs/node_modules/@@editorjs/Code/dist/Code.umd.js"></script>
+<script type="module" src="/lib/editorjs/node_modules/@@editorjs/delimiter/dist/delimiter.mjs"></script>
+<script src="/lib/editorjs/node_modules/@@editorjs/delimiter/dist/delimiter.umd.js"></script>
+<script type="module" src="/lib/editorjs/node_modules/@@editorjs/simple-image/dist/simple-image.mjs"></script>
+<script src="/lib/editorjs/node_modules/@@editorjs/simple-image/dist/simple-image.umd.js"></script>
+
+<script>
+	// Initialize Editor.js
+	const editor = new EditorJS({
+		holder: 'editorjs',
+		tools: {
+			header: {
+				class: Header,
+				inlineToolbar: true
+			},
+			image: {
+				class: SimpleImage,
+				inlineToolbar: true
+			},
+			code: {
+				class: CodeTool,
+				inlineToolbar: true
+			},
+			delimiter: {
+				class: Delimiter,
+				inlineToolbar: true
+			}
+		}
+	});
+
+	// Custom form submission to include Editor.js content
+	document.getElementById('publishButton').addEventListener('click', async function () {
+		const title = document.getElementById('title').value;
+		const Samary = document.getElementById('Samary').value;
+		const categoryIds = Array.from(document.querySelectorAll('input[name="categoryIds"]:checked')).map(checkbox => checkbox.value);
+		const imageInput = document.getElementById('image'); // Get the uploaded image file
+		const editorContent = await editor.save();
+		
+		// Set the Editor.js content as the value of the hidden input field in the form
+		document.getElementById('content').value = JSON.stringify(editorContent);
+
+		// Submit the form programmatically
+		const formData = new FormData();
+		formData.append('title', title);
+		formData.append('Samary', Samary);
+		formData.append('content', JSON.stringify(editorContent));
+		if (imageInput.files.length > 0) {
+			formData.append('image', imageInput.files[0]);
+		}
+		categoryIds.forEach(id => formData.append('categoryIds', id)); // Append category IDs individually
+
+		try {
+			const response = await fetch('/author/articles/AddPost', {
+				method: 'POST',
+				body: formData
+			});
+
+			if (response.ok) {
+				window.location.href = '/User/Index';
+			} else {
+				// Handle error
+				console.error('Failed to create article.');
+			}
+		} catch (error) {
+			console.error('Failed to fetch:', error);
+		}
+	});
+</script>
+

@@ -28,5 +28,8 @@ namespace BLL.Services.IServices
         //Task<IEnumerable<Post>> GetPostsInCatigoryAsync(int catigoryId);
         //IEnumerable<Post> GetPostsInCatigories(List<int> catigories);
         //Task<IEnumerable<Post>> GetPostsInCatigoriesAsync(List<int> catigories);
+        Task AddPostAsync (Post post);
+        void AddPost(Post post);
+
     }
 }
