@@ -267,8 +267,8 @@
 			<input type="hidden" id="content" name="content" /> <!-- Hidden field to store Editor.js content -->
 		</div>
 		<div class="form-group">
-			<label for="image">Image</label>
-			<input type="file" class="form-control" id="image" name="image" />
+			<label for="img">Image</label>
+			<input type="file" class="form-control" id="img" name="img" />
 		</div>
 		<div class="rounded border border-1 d-flex flex-wrap p-1 my-5 gap-1 justify-content-center">
 			@foreach (var category in Model)
@@ -326,7 +326,7 @@
 		const title = document.getElementById('title').value;
 		const Samary = document.getElementById('Samary').value;
 		const categoryIds = Array.from(document.querySelectorAll('input[name="categoryIds"]:checked')).map(checkbox => checkbox.value);
-		const imageInput = document.getElementById('image'); // Get the uploaded image file
+		const imageInput = document.getElementById('img'); // Get the uploaded image file
 		const editorContent = await editor.save();
 		
 		// Set the Editor.js content as the value of the hidden input field in the form
@@ -338,7 +338,7 @@
 		formData.append('Samary', Samary);
 		formData.append('content', JSON.stringify(editorContent));
 		if (imageInput.files.length > 0) {
-			formData.append('image', imageInput.files[0]);
+			formData.append('img', imageInput.files[0]);
 		}
 		categoryIds.forEach(id => formData.append('categoryIds', id)); // Append category IDs individually
 

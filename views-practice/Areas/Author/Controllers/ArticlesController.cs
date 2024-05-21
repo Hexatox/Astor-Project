@@ -11,6 +11,7 @@ using NuGet.Protocol;
 using System.Collections.ObjectModel;
 using System.IdentityModel.Tokens.Jwt;
 using Utility.Enum;
+using views_practice.Utility;
 
 namespace views_practice.Areas.Author.Controllers
 {
@@ -23,12 +24,14 @@ namespace views_practice.Areas.Author.Controllers
         private readonly IPostService postService;
 		private readonly UserManager<ApplicationUser> userManager;
 		private readonly IPostCatigoryService postCatigoryService;
-        public ArticlesController(ICatigoryService catigoryService , IPostService postService , UserManager<ApplicationUser> userManager , IPostCatigoryService postCatigoryService)
+		private readonly IUploadFile uploadFile;
+        public ArticlesController(ICatigoryService catigoryService , IPostService postService , UserManager<ApplicationUser> userManager , IPostCatigoryService postCatigoryService , IUploadFile uploadFile)
         {
             this.catigoryService = catigoryService;
 			this.postService = postService;
 			this.userManager = userManager;
 			this.postCatigoryService = postCatigoryService;
+			this.uploadFile = uploadFile;
         }
 
 
@@ -100,15 +103,23 @@ namespace views_practice.Areas.Author.Controllers
 
 		//     }
 		[HttpPost]
-		public async Task<IActionResult> AddPost(Post post , List<int> categoryIds , IFormFile image)
+		public async Task<IActionResult> AddPost(Post post , List<int> categoryIds , IFormFile img)
 		{
-			post.PostDate = DateTime.Now;
-			post.PostType = PostType.Article;
-			post.Image = @"https://www.google.com/imgres?imgurl=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fthumbnails%2F002%2F115%2F431%2Fsmall_2x%2Fcoming-soon-business-sign-free-vector.jpg&tbnid=D7ssStfQjxl6OM&vet=12ahUKEwi0gerB4p2GAxWFdqQEHUIjAFwQMygFegQIARB8..i&imgrefurl=https%3A%2F%2Fwww.vecteezy.com%2Ffree-vector%2Fcoming-soon-sign&docid=QBgAzwDCrQLsFM&w=411&h=400&q=soon&ved=2ahUKEwi0gerB4p2GAxWFdqQEHUIjAFwQMygFegQIARB8";
-			post.UserId = userManager!.GetUserId(User);
-			await postService.AddPostAsync(post);
-			await postCatigoryService.AssignPostToCatigoriesAsync(post.PostId, categoryIds);
-			return RedirectToAction("Index");
+
+
+
+				post.PostDate = DateTime.Now;
+				post.PostType = PostType.Article;
+				post.Image = await uploadFile.Upload(img);
+				post.UserId = userManager!.GetUserId(User);
+				await postService.AddPostAsync(post);
+				await postCatigoryService.AssignPostToCatigoriesAsync(post.PostId, categoryIds);
+				return RedirectToAction("Index");
+
+			
+
+			
+			
 		}
 
 
