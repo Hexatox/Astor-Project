@@ -18,7 +18,17 @@ namespace DAL.Repositories
             this.appDbContext = appDbContext;
         }
 
-        public async Task<List<Post>> GetAllNavs()
+		public async Task<Post> GetAllByAsync(string id)
+		{
+			var p = await appDbContext.Posts.Include(p => p.User)
+				.Include(p => p.Likes)
+				.Include(p => p.Comments)
+				.Include(p => p.Catigories)
+				.FirstOrDefaultAsync(p => p.User.Id == id);
+            return p;
+		}
+
+		public async Task<List<Post>> GetAllNavs()
         {
             var items = await appDbContext.Posts
                 .Include(p => p.User)
@@ -37,5 +47,6 @@ namespace DAL.Repositories
                 .Include(p => p.Catigories)
                 .FirstOrDefaultAsync(p => p.PostId == Id);
         }
+
     }
 }

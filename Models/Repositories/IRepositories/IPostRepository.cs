@@ -11,5 +11,6 @@ namespace DAL.Repositories.IRepositories
     {
         Task<Post> GetBy(int Id);
         public Task<List<Post>> GetAllNavs();
+        Task<Post> GetAllByAsync(string id);
     }
 }
