@@ -2,6 +2,7 @@
 using DAL.Entities;
 using DAL.Repositories.IRepositories;
 using Humanizer.DateTimeHumanizeStrategy;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,9 @@ using Newtonsoft.Json.Linq;
 using NuGet.Protocol;
 using System.Collections.ObjectModel;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using Utility.Enum;
+using views_practice.Models;
 using views_practice.Utility;
 
 namespace views_practice.Areas.Author.Controllers
@@ -118,7 +121,35 @@ namespace views_practice.Areas.Author.Controllers
 			
 		}
 
+		
+		public async Task< ActionResult >Delete(int id)
+		{
+			if (ModelState.IsValid)
+			{
+				var post = await  postService.GetPostByIdAsync(id);
+				var user = await  userManager.GetUserAsync(User);
 
+
+				if (post != null && post.UserId == user.Id ) {
+					bool res = await postService.DeletePostAsync(id,user.Id);
+
+
+					if (!res)
+					{
+						return BadRequest(res);
+						
+					}
+					return Ok(); 
+
+				
+				}
+			}
+
+
+			return BadRequest(); 
+		}
+
+		
 	}
 
 
