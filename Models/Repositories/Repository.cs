@@ -66,22 +66,33 @@ namespace DAL.Repositories
 
         public bool Remove(T entity)
         {
-            if (Find(entity) != null)
-            {
-                appDbContext.Set<T>().Remove(entity);
-                return true;
-            }
-            return false;
-        }
+
+			try
+			{
+				appDbContext.Set<T>().Remove(entity);
+				return true; 
+			}
+			catch (Exception ex)
+			{
+				return false; 
+			}
+
+		}
         public async Task<bool> RemoveAsync(T entity)
         {
-            if (await FindAsync(entity) != null)
-            {
-                appDbContext.Set<T>().Remove(entity);
-                return true;
-            }
-            return false;
-        }
+
+			try
+			{
+				appDbContext.Set<T>().Remove(entity);
+				await Task.Delay(0); 
+				return true; 
+			}
+			catch (Exception ex)
+			{
+				return false;
+			}
+
+		}
 
         public int Save()
         {

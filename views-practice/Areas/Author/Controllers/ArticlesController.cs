@@ -126,23 +126,20 @@ namespace views_practice.Areas.Author.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var post = await  postService.GetPostByIdAsync(id);
 				var user = await  userManager.GetUserAsync(User);
 
 
-				if (post != null && post.UserId == user.Id ) {
-					bool res = await postService.DeletePostAsync(id,user.Id);
+				bool res = await postService.DeletePostAsync(id,user.Id);
 
 
-					if (!res)
-					{
-						return BadRequest(res);
-						
-					}
-					return Ok(); 
+				if (!res)
+				{
+					return BadRequest(res);
+				}
+				return Ok(); 
 
 				
-				}
+				
 			}
 
 
