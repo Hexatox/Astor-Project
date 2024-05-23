@@ -35,11 +35,7 @@ namespace views_practice.Areas.Author.Controllers
         }
 
 
-        [Area("User")]
-        public IActionResult Index()
-        {
-            return View();
-        }
+       
         [Area("Author")]
         public async Task<IActionResult> NewArticle()
         {
